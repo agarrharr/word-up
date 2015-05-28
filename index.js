@@ -11,115 +11,115 @@ var chart = svg.append("g")
 var data = [
   {
     id: 0,
-    value: 'A',
+    value: 'W',
     row: 0,
     column: 0,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 1,
-    value: 'W',
+    value: 'O',
     row: 0,
     column: 1,
-    color: 'green'
+    color: getRandomColor()
   },
   {
     id: 2,
-    value: 'E',
+    value: 'T',
     row: 0,
     column: 2,
-    color: 'orange'
+    color: getRandomColor()
   },
   {
     id: 3,
-    value: 'S',
+    value: 'Qu',
     row: 0,
     column: 3,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 4,
-    value: 'Qu',
+    value: 'L',
     row: 1,
     column: 0,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 5,
-    value: 'F',
+    value: 'S',
     row: 1,
     column: 1,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 6,
-    value: 'T',
+    value: 'R',
     row: 1,
     column: 2,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 7,
-    value: 'H',
+    value: 'A',
     row: 1,
     column: 3,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 8,
-    value: 'O',
+    value: 'Y',
     row: 2,
     column: 0,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 9,
-    value: 'N',
+    value: 'E',
     row: 2,
     column: 1,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 10,
-    value: 'M',
+    value: 'C',
     row: 2,
     column: 2,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 11,
-    value: 'W',
+    value: 'V',
     row: 2,
     column: 3,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 12,
-    value: 'I',
+    value: 'T',
     row: 3,
     column: 0,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 13,
-    value: 'P',
+    value: 'I',
     row: 3,
     column: 1,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 14,
-    value: 'G',
+    value: 'P',
     row: 3,
     column: 2,
-    color: 'red'
+    color: getRandomColor()
   },
   {
     id: 15,
-    value: 'H',
+    value: 'E',
     row: 3,
     column: 3,
-    color: 'red'
+    color: getRandomColor()
   }
 ];
 
@@ -154,4 +154,11 @@ function getPointsForWord(word) {
   }
 
   return points;
+}
+
+function getRandomColor() {
+  var colors = ['#F75168', '#678FC1', '#b5577e', '#1DAD7C', '#F98D3F'];
+  var randomIndex = Math.floor(Math.random() * colors.length);
+
+  return colors[randomIndex];
 }
