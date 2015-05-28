@@ -124,3 +124,34 @@ var data = [
 ];
 
 chart.draw(data);
+
+
+function getPointsForWord(word) {
+  var points;
+
+  switch(word.length) {
+    case 3:
+      points = 1;
+      break;
+    case 4:
+      points = 1;
+      break;
+    case 5:
+      points = 2;
+      break;
+    case 6:
+      points = 3;
+      break;
+    case 7:
+      points = 5;
+      break;
+  }
+
+  if (word.length < 3) {
+    points = 0;
+  } else if (word.length > 7) {
+    points = 11;
+  }
+
+  return points;
+}
