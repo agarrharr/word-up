@@ -1,3 +1,7 @@
+var game = function() {
+  return 2;
+};
+
 var score = 0;
 var highScore = 19;
 var savedColors = [];
@@ -15,17 +19,6 @@ var svg = d3.select('#game')
     'height': height + padding * 2,
     'width': width + padding * 2
   });
-
-// svg.append('rect')
-//   .attr({
-//     'x': 0,
-//     'y': (tileSize * 2) + tileLargeSpace,
-//     'height': (tileSize * 4) + padding * 2,
-//     'width': width + padding * 2
-//   })
-//   .style({
-//     'fill': '#d4d4d4'
-//   });
 
 var group = svg.append('g')
   .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
