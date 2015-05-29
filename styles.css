@@ -1,4 +1,5 @@
 body {
+	font-family: 'Open Sans'
 }
 
 .container {
@@ -7,6 +8,8 @@ body {
 }
 
 h1 {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 700;
 }
 
 .score {
@@ -30,6 +33,9 @@ h1 {
 .selected {
 	stroke: #555;
 	stroke-width: 5px;
+}
+.letterGroup text {
+	font-family: 'Roboto Slab', serif;
 }
 .letterGroup text::selection {
     background: transparent;
