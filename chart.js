@@ -9,6 +9,7 @@ d3.chart('boggle-down', {
     var fontSize = tileSize * 0.6;
     var yPos = function(d) { return _Chart.height - tileSize - (d.row * (tileSize + padding)); };
     var xPos = function(d) { return d.column * (tileSize + padding); };
+    var isInitialAnimation = true;
 
     this._layer = this.base.append('g');
 
@@ -26,45 +27,61 @@ d3.chart('boggle-down', {
     })
     .on('enter', function () {
       
+      this.attr('transform', function(d) { 
+        return 'translate(' + xPos(d) + ',' + -(tileSize) + ')';
+      })
       
       this.append('rect')
-          .attr({
-            'class': 'tiles',
-            'height': tileSize,
-            'width': tileSize,
-            'rx': 15,
-            'ry': 15
-            });
+        .attr({
+          'class': 'tiles',
+          'height': tileSize,
+          'width': tileSize,
+          'rx': 15,
+          'ry': 15
+        });
             
       this.append('text')
-          .attr({
-            'class': 'letter',
-            'font-size': fontSize,
-            'text-anchor': 'middle'
-          });  
+        .attr({
+          'class': 'letter',
+          'font-size': fontSize,
+          'text-anchor': 'middle'
+        });  
            
       return this;
     })
     .on('merge', function () {
       
-      this.attr({
-            'transform': function(d) { 
-              return 'translate(' + xPos(d) + ',' + yPos(d)+ ')';
-             }
-          })
+      this
+        .transition()
+        .delay(function(d) {
+          if (isInitialAnimation) { 
+            return 100 * d.id;
+          }
+          else {
+            return 0;
+          }
+         })
+        .duration(500)
+        .ease('bounce')
+        .attr({
+          'transform': function(d) { 
+            return 'translate(' + xPos(d) + ',' + yPos(d)+ ')';
+          }
+        });
+        
+        isInitialAnimation = false;
       
       this.select('rect.tiles')
-      .style('fill', function(d) {
-            return d.color;
-          })
-          ;
+        .style('fill', function(d) {
+          return d.color;
+        });
       
       this.select('text.letter')
           .style({
             'fill': '#fff'
           })
           .attr({
-            'dy': tileSize * 0.7,
+            'dy': tileSize * 0.65,
             'dx': tileSize * 0.5
           })
           .text(function(d) { return d.value; });
