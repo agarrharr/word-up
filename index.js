@@ -28,7 +28,7 @@ var svg = d3.select('#game')
 //   });
 
 var group = svg.append('g')
-  .attr('transform', 'translate(' + (padding + strokeWidth) + ', ' + (-strokeWidth) + ')');
+  .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
 
 var chart = group.chart('boggle-down');
 
