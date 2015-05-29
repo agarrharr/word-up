@@ -18,6 +18,9 @@ h1 {
 	float: right;
 }
 
+.cl {
+	clear: both;
+}
 .moves,
 .stats {
 	display: block;
