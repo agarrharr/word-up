@@ -1,4 +1,4 @@
-d3.chart('boggle-down', {
+d3.chart('word-up', {
   initialize: function () {
     'use strict';
 

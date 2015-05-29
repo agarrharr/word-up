@@ -30,7 +30,7 @@ var svg = d3.select('#game')
 var group = svg.append('g')
   .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
 
-var chart = group.chart('boggle-down');
+var chart = group.chart('word-up');
 
 var data = [
   {
