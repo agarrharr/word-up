@@ -5,12 +5,12 @@ var savedColors = [];
 var svg = d3.select('#game')
   .append('svg')
   .attr({
-    'height': 600,
+    'height': 610,
     'width': 610
   });
 
 var chart = svg.append('g')
-  .attr('transform', 'translate(5,0)')
+  .attr('transform', 'translate(5, -5)')
   .chart('boggle-down');
 
 var data = [
