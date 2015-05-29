@@ -1,0 +1,20 @@
+body {
+}
+
+.container {
+	width: 600px;
+	margin: 0 auto;
+}
+
+h1 {
+}
+
+.score {
+	display: block;
+	float: left;
+	width: 300px;
+}
+.scoreTitle {
+}
+.scoreNumber{
+}
