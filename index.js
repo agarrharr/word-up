@@ -381,8 +381,10 @@ chart.on('wordCreated', function(word, data) {
   // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
   addToScore(currentScore);
+  addToMoves();
   chart.draw(data2);
 });
+
 
 function getPointsForWord(word) {
   var points;
@@ -422,6 +424,11 @@ function getRandomColor(id) {
     savedColors[id] = colors[randomIndex];
   }
   return savedColors[id];
+}
+
+function addToMoves() {
+  var moves = parseInt(d3.select('#moves').html());
+  d3.select('#moves').html(moves + 1);
 }
 
 function addToScore(newScore) {
