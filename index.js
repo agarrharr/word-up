@@ -384,7 +384,6 @@ chart.on('wordCreated', function(word, data) {
   chart.draw(data2);
 });
 
-
 function getPointsForWord(word) {
   var points;
 

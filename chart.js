@@ -96,8 +96,17 @@ d3.chart('boggle-down', {
         isInitialAnimation = false;
 
       this.select('rect.tiles')
-        .style('fill', function(d) {
-          return d.color;
+        .style({'fill': function(d) {
+            return d.color;
+         },
+         'opacity': function(d,i) {
+           if (i >= 16) {
+             return 0.4;
+           }
+           else {
+             return 1;
+           }
+         }
         });
 
       this.select('text')
