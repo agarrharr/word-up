@@ -3,9 +3,9 @@ d3.chart('boggle-down', {
     'use strict';
 
     var _Chart = this;
-    _Chart.height= 600;
+    _Chart.height= 800;
     var padding = 10;
-    var tileSize = (_Chart.height / 5) - padding;
+    var tileSize = (_Chart.height / 6) - padding;
     var fontSize = tileSize * 0.6;
     var yPos = function(d) { return _Chart.height - tileSize - (d.row * (tileSize + padding)); };
     var xPos = function(d) { return d.column * (tileSize + padding); };
