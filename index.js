@@ -2,16 +2,35 @@ var score = 0;
 var highScore = 19;
 var savedColors = [];
 
+var padding = 50;
+var strokeWidth = 5;
+var height = 800;
+var width = 600;
+var tileSize = height / 6;
+var tileLargeSpace = tileSize * 0.8;
+
 var svg = d3.select('#game')
   .append('svg')
   .attr({
-    'height': 900,
-    'width': 610
+    'height': height + padding * 2,
+    'width': width + padding * 2
   });
 
-var chart = svg.append('g')
-  .attr('transform', 'translate(5, -5)')
-  .chart('boggle-down');
+// svg.append('rect')
+//   .attr({
+//     'x': 0,
+//     'y': (tileSize * 2) + tileLargeSpace,
+//     'height': (tileSize * 4) + padding * 2,
+//     'width': width + padding * 2
+//   })
+//   .style({
+//     'fill': '#d4d4d4'
+//   });
+
+var group = svg.append('g')
+  .attr('transform', 'translate(' + (padding + strokeWidth) + ', ' + (-strokeWidth) + ')');
+
+var chart = group.chart('boggle-down');
 
 var data = [
   {
@@ -359,28 +378,12 @@ chart.draw(data);
 setupScores();
 
 chart.on('wordCreated', function(word, data) {
-  var currentScore = getPointsForWord(word);
+  // var currentScore = getPointsForWord(word);
+  var currentScore = getPointsForWord('tip');
   addToScore(currentScore);
+  chart.draw(data2);
 });
 
-var isDragging = false;
-var selectedLetters = [];
-d3.selectAll('.letterGroup')
-  .on('mousedown', function() {
-    isDragging = true;
-  })
-  .on('mouseup', function() {
-    isDragging = false;
-    chart.draw(data2);
-    var currentScore = getPointsForWord('tip');
-    addToScore(currentScore);
-  })
-  .on('mousemove', function(d) {
-    if (isDragging) {
-      selectedLetters.push(d.id);
-      d3.select(this).select('rect').classed('selected', true);
-    }
-  });
 
 function getPointsForWord(word) {
   var points;
