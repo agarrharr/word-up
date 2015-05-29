@@ -3,7 +3,9 @@ d3.chart('word-up', {
     'use strict';
 
     var _Chart = this;
+
     _Chart.height = 800;
+
     var padding = 10;
     var tileSize = (_Chart.height / 6) - padding;
     var fontSize = tileSize * 0.6;
@@ -38,12 +40,12 @@ d3.chart('word-up', {
       })
       .on('enter', function() {
         this.attr('transform', function(d) {
-          return 'translate(' + xPos(d) + ',' + -(tileSize) + ')';
+          return 'translate(' + xPos(d) + ', ' + -(tileSize) + ')';
         });
 
 
         this.on('mousedown', function(d, i) {
-            if (i >= 16) {
+            if (d.row > 3) {
               return;
             }
             selectedLetters = [];
@@ -57,6 +59,9 @@ d3.chart('word-up', {
             }
           })
           .on('mousemove', function(d) {
+            if (d.row > 3) {
+              return;
+            }
             if (isDragging) {
               selectedLetters.push(d.id);
               d3.select(this).select('rect').classed('selected', true);
@@ -100,7 +105,7 @@ d3.chart('word-up', {
           .ease('bounce')
           .attr({
             'transform': function(d, i) {
-              return 'translate(' + xPos(d) + ',' + yPos(d, i) + ')';
+              return 'translate(' + xPos(d) + ', ' + yPos(d, i) + ')';
             }
           });
 
