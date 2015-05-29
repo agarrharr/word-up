@@ -20,7 +20,21 @@ h1 {
 }
 
 /* Svg styles */
+.letterGroup {
+	cursor: pointer;
+}
 .selected {
-	stroke: #000;
-	stroke-width: 2px;
+	stroke: #555;
+	stroke-width: 5px;
+}
+.letterGroup text::selection {
+    background: transparent;
+}
+
+.letterGroup text::-moz-selection {
+    background: transparent;
+}
+
+.letterGroup text::-webkit-selection {
+    background: transparent;
 }

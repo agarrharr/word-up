@@ -3,14 +3,15 @@ var highScore = 19;
 var savedColors = [];
 
 var svg = d3.select('#game')
-	.append('svg')
-	.attr({
-		'height': 600,
-		'width': 600
-	});
+  .append('svg')
+  .attr({
+    'height': 600,
+    'width': 610
+  });
 
-var chart = svg.append("g")
-	.chart('boggle-down');
+var chart = svg.append('g')
+  .attr('transform', 'translate(5,0)')
+  .chart('boggle-down');
 
 var data = [
   {
@@ -355,10 +356,6 @@ var data2 = [
 
 chart.draw(data);
 
-setTimeout(function() {
-  chart.draw(data2);
-}, 3000);
-
 setupScores();
 
 chart.on('wordCreated', function(word, data) {
@@ -374,11 +371,14 @@ d3.selectAll('.letterGroup')
   })
   .on('mouseup', function() {
     isDragging = false;
+    chart.draw(data2);
+    var currentScore = getPointsForWord('tip');
+    addToScore(currentScore);
   })
-  .on('mouseenter', function(d) {
+  .on('mousemove', function(d) {
     if (isDragging) {
       selectedLetters.push(d.id);
-      d3.select(this).classed('selected', true);
+      d3.select(this).select('rect').classed('selected', true);
     }
   });
 
