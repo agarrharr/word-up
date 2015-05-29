@@ -18,6 +18,9 @@ d3.chart('boggle-down', {
     var xPos = function(d) { return d.column * (tileSize + padding); };
     var isInitialAnimation = true;
 
+    var isDragging = false;
+    var selectedLetters;
+
     this._layer = this.base.append('g');
 
     _Chart.layer('bars', this._layer, {
@@ -33,11 +36,27 @@ d3.chart('boggle-down', {
       }
     })
     .on('enter', function () {
-      
-      this.attr('transform', function(d) { 
+      this.attr('transform', function(d) {
         return 'translate(' + xPos(d) + ',' + -(tileSize) + ')';
       });
-      
+
+
+      this.on('mousedown', function() {
+          selectedLetters = [];
+          isDragging = true;
+        })
+        .on('mouseup', function() {
+          isDragging = false;
+          d3.selectAll('rect').classed('selected', false);
+          _Chart.trigger('wordCreated', selectedLetters);
+        })
+        .on('mousemove', function(d) {
+          if (isDragging) {
+            selectedLetters.push(d.id);
+            d3.select(this).select('rect').classed('selected', true);
+          }
+        });
+
       this.append('rect')
         .attr({
           'class': 'tiles',
@@ -46,22 +65,20 @@ d3.chart('boggle-down', {
           'rx': 15,
           'ry': 15
         });
-            
+
       this.append('text')
         .attr({
-          'class': function(d) {return d.value},
+          'class': function(d) { return d.value; },
           'font-size': fontSize,
           'text-anchor': 'middle'
-        });  
-           
+        });
+
       return this;
     })
     .on('merge', function () {
-      
-      this
-        .transition()
+      this.transition()
         .delay(function(d) {
-          if (isInitialAnimation) { 
+          if (isInitialAnimation) {
             return 100 * d.id;
           }
           else {
@@ -71,18 +88,18 @@ d3.chart('boggle-down', {
         .duration(750)
         .ease('bounce')
         .attr({
-          'transform': function(d, i) { 
+          'transform': function(d, i) {
             return 'translate(' + xPos(d) + ',' + yPos(d, i) + ')';
           }
         });
-        
+
         isInitialAnimation = false;
-      
+
       this.select('rect.tiles')
         .style('fill', function(d) {
           return d.color;
         });
-      
+
       this.select('text')
           .style({
             'fill': '#fff'
@@ -95,22 +112,22 @@ d3.chart('boggle-down', {
       return this;
     })
     .on('exit', function () {
-      
+
       this.transition()
       .duration(750)
       .attr({
-        'transform': function(d, i) { 
+        'transform': function(d, i) {
             return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + ( yPos(d, i) + (tileSize * 1.5) ) + '), rotate( 20 )';
           }
       })
       .style('opacity', 0)
       .remove();
-      
+
       return this;
     });
   },
-  
-  height: function(value) { 
+
+  height: function(value) {
     this.height = value;
     return this;
   }
