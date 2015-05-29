@@ -135,6 +135,21 @@ chart.on('wordCreated', function(word, data) {
   addToScore(currentScore);
 });
 
+var isDragging = false;
+var selectedLetters = [];
+d3.selectAll('.letterGroup')
+  .on('mousedown', function() {
+    isDragging = true;
+  })
+  .on('mouseup', function() {
+    isDragging = false;
+  })
+  .on('mouseenter', function(d) {
+    if (isDragging) {
+      selectedLetters.push(d.id);
+      d3.select(this).classed('selected', true);
+    }
+  });
 
 function getPointsForWord(word) {
   var points;
