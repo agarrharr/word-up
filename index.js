@@ -1,3 +1,6 @@
+var score = 0;
+var highScore = 19;
+
 var svg = d3.select('#game')
 	.append('svg')
 	.attr({
@@ -125,6 +128,13 @@ var data = [
 
 chart.draw(data);
 
+setupScores();
+
+chart.on('wordCreated', function(word, data) {
+  var currentScore = getPointsForWord(word);
+  addToScore(currentScore);
+});
+
 
 function getPointsForWord(word) {
   var points;
@@ -161,4 +171,19 @@ function getRandomColor() {
   var randomIndex = Math.floor(Math.random() * colors.length);
 
   return colors[randomIndex];
+}
+
+function addToScore(newScore) {
+  score += newScore;
+  d3.select('#score').html(score);
+}
+
+function addToHighScore(newScore) {
+  highScore += newScore;
+  d3.select('#highScore').html(highScore);
+}
+
+function setupScores() {
+  d3.select('#score').html(score);
+  d3.select('#highScore').html(highScore);
 }
