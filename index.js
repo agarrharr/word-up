@@ -357,7 +357,7 @@ chart.draw(data);
 
 setTimeout(function() {
   chart.draw(data2);
-}, 1000);
+}, 3000);
 
 setupScores();
 
