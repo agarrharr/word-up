@@ -7,7 +7,14 @@ d3.chart('boggle-down', {
     var padding = 10;
     var tileSize = (_Chart.height / 6) - padding;
     var fontSize = tileSize * 0.6;
-    var yPos = function(d) { return _Chart.height - tileSize - (d.row * (tileSize + padding)); };
+    var yPos = function(d ,i) {
+      if(i >= 16) {
+        return _Chart.height - tileSize - (d.row * (tileSize + padding));
+      }
+      else {
+        return _Chart.height - tileSize + (tileSize * 0.75) - (d.row * (tileSize + padding));
+      }
+    };
     var xPos = function(d) { return d.column * (tileSize + padding); };
     var isInitialAnimation = true;
 
@@ -29,7 +36,7 @@ d3.chart('boggle-down', {
       
       this.attr('transform', function(d) { 
         return 'translate(' + xPos(d) + ',' + -(tileSize) + ')';
-      })
+      });
       
       this.append('rect')
         .attr({
@@ -42,7 +49,7 @@ d3.chart('boggle-down', {
             
       this.append('text')
         .attr({
-          'class': 'letter',
+          'class': function(d) {return d.value},
           'font-size': fontSize,
           'text-anchor': 'middle'
         });  
@@ -64,8 +71,8 @@ d3.chart('boggle-down', {
         .duration(750)
         .ease('bounce')
         .attr({
-          'transform': function(d) { 
-            return 'translate(' + xPos(d) + ',' + yPos(d) + ')';
+          'transform': function(d, i) { 
+            return 'translate(' + xPos(d) + ',' + yPos(d, i) + ')';
           }
         });
         
@@ -76,7 +83,7 @@ d3.chart('boggle-down', {
           return d.color;
         });
       
-      this.select('text.letter')
+      this.select('text')
           .style({
             'fill': '#fff'
           })
@@ -92,12 +99,13 @@ d3.chart('boggle-down', {
       this.transition()
       .duration(750)
       .attr({
-        'transform': function(d) { 
-            return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + ( yPos(d) + (tileSize * 1.5) ) + '), rotate( 20 )';
+        'transform': function(d, i) { 
+            return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + ( yPos(d, i) + (tileSize * 1.5) ) + '), rotate( 20 )';
           }
       })
       .style('opacity', 0)
       .remove();
+      
       return this;
     });
   },
