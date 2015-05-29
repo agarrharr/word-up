@@ -41,14 +41,19 @@ d3.chart('boggle-down', {
       });
 
 
-      this.on('mousedown', function() {
+      this.on('mousedown', function(d,i) {
+          if( i >= 16 ) {
+            return;
+          }
           selectedLetters = [];
           isDragging = true;
         })
         .on('mouseup', function() {
-          isDragging = false;
-          d3.selectAll('rect').classed('selected', false);
-          _Chart.trigger('wordCreated', selectedLetters);
+          if (isDragging) {
+            isDragging = false;
+            d3.selectAll('rect').classed('selected', false);
+            _Chart.trigger('wordCreated', selectedLetters);
+          }
         })
         .on('mousemove', function(d) {
           if (isDragging) {
@@ -98,16 +103,9 @@ d3.chart('boggle-down', {
       this.select('rect.tiles')
         .style({'fill': function(d) {
             return d.color;
-         },
-         'opacity': function(d,i) {
-           if (i >= 16) {
-             return 0.4;
-           }
-           else {
-             return 1;
-           }
          }
-        });
+        })
+        .attr('class', 'disabled');
 
       this.select('text')
           .style({
