@@ -3,9 +3,22 @@
 	<head>
 		<script src="bower_components/d3/d3.min.js"></script>
 		<script src="bower_components/d3.chart/d3.chart.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
 	<body>
-		<div id="game"></div>
+		<div class="container">
+			<h1>Word Up</h1>
+			<div class="score">
+				<div class="scoreTitle">Score</div>
+				<div class="scoreNumber">0</div>
+			</div>
+			<div class="score">
+				<div class="scoreTitle">Best</div>
+				<div class="scoreNumber">19</div>
+			</div>
+			<div id="game"></div>
+		</div>
 		<script src="chart.js"></script>
 		<script src="index.js"></script>
 	</body>
