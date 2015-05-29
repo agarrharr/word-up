@@ -1,0 +1,30 @@
+{
+  "name": "word-up",
+  "version": "1.0.0",
+  "description": "It's not quite working yet, but there is a demo to get an idea of how it would work.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aharris88/toggle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aharris88/toggle/issues"
+  },
+  "homepage": "https://github.com/aharris88/toggle",
+  "dependencies": {
+    "karma": "^0.12.34",
+    "mocha": "^2.2.5"
+  },
+  "devDependencies": {
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-mocha": "^0.1.10",
+    "karma-requirejs": "^0.2.2",
+    "requirejs": "^2.1.18"
+  }
+}
