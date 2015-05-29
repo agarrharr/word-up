@@ -81,6 +81,10 @@ d3.chart('boggle-down', {
       return this;
     })
     .on('merge', function () {
+      this.classed('disabled', function(d) {
+        return d.row > 3;
+      });
+
       this.transition()
         .delay(function(d) {
           if (isInitialAnimation) {
@@ -104,8 +108,7 @@ d3.chart('boggle-down', {
         .style({'fill': function(d) {
             return d.color;
          }
-        })
-        .attr('class', 'disabled');
+        });
 
       this.select('text')
           .style({
