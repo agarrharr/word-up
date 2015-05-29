@@ -61,11 +61,11 @@ d3.chart('boggle-down', {
             return 0;
           }
          })
-        .duration(500)
+        .duration(750)
         .ease('bounce')
         .attr({
           'transform': function(d) { 
-            return 'translate(' + xPos(d) + ',' + yPos(d)+ ')';
+            return 'translate(' + xPos(d) + ',' + yPos(d) + ')';
           }
         });
         
@@ -88,7 +88,17 @@ d3.chart('boggle-down', {
       return this;
     })
     .on('exit', function () {
-      return this.remove();
+      
+      this.transition()
+      .duration(750)
+      .attr({
+        'transform': function(d) { 
+            return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + ( yPos(d) + (tileSize * 1.5) ) + '), rotate( 20 )';
+          }
+      })
+      .style('opacity', 0)
+      .remove();
+      return this;
     });
   },
   
