@@ -5,7 +5,7 @@ var savedColors = [];
 var svg = d3.select('#game')
   .append('svg')
   .attr({
-    'height': 810,
+    'height': 900,
     'width': 610
   });
 
