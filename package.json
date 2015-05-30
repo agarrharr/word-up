@@ -18,6 +18,8 @@
   "homepage": "https://github.com/aharris88/toggle",
   "dependencies": {
     "karma": "^0.12.34",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-safari-launcher": "^0.1.1",
     "mocha": "^2.2.5"
   },
   "devDependencies": {
