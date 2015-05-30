@@ -8,7 +8,7 @@ var game = function() {
   var totalRows = rows + nextRows;
   var columns = 4;
   var highestId = 0;
-  var missingFromColumns = [6, 6, 6, 6];
+  var missingFromColumns;
 
   var getScore = function() {
     return score;
@@ -39,6 +39,7 @@ var game = function() {
 
   var newGame = function() {
     score = 0;
+    missingFromColumns = [totalRows, totalRows, totalRows, totalRows];
     addData();
   };
 
@@ -57,7 +58,7 @@ var game = function() {
           data.push({
             id: highestId,
             value: getRandomLetter(),
-            row: missingFromColumns[i] - 1,
+            row: totalRows - (missingFromColumns[i]),
             column: i,
             color: getRandomColor()
           });
@@ -72,6 +73,7 @@ var game = function() {
     for(var j = 0; j < ids.length; j += 1) {
       for(var i = 0; i < data.length; i += 1) {
         if (data[i].id === ids[j]) {
+          missingFromColumns[data[i].column] += 1;
           data.splice(i, 1);
         }
       }
@@ -136,6 +138,7 @@ setupScores();
 
 chart.on('wordCreated', function(letterIds) {
   game.removeData(letterIds);
+  game.addData();
   // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
   game.addToScore(currentScore);
