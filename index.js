@@ -8,7 +8,6 @@ var game = function() {
   var totalRows = rows + nextRows;
   var columns = 4;
   var highestId = 0;
-  var missingFromColumns;
 
   var getScore = function() {
     return score;
@@ -39,7 +38,6 @@ var game = function() {
 
   var newGame = function() {
     score = 0;
-    missingFromColumns = [totalRows, totalRows, totalRows, totalRows];
     addData();
   };
 
@@ -51,42 +49,22 @@ var game = function() {
   };
 
   var addData = function() {
-    var row;
     var numberOfTiles = columns * (totalRows);
     if (data.length !== numberOfTiles) {
-      for(var column = 0; column < missingFromColumns.length; column += 1) {
-        while(missingFromColumns[column] > 0) {
-          row = totalRows - (missingFromColumns[column]);
-          if (!data[column]) {
-            data[column] = [];
-          }
-          if (!data[column][row]) {
-            data[column][row] = [];
-          }
-          moveOtherTilesDown();
-          data[column][row] = {
+      for(var column = 0; column < columns; column += 1) {
+        if (!data[column]) {
+          data[column] = [];
+        }
+        while (data[column].length < totalRows) {
+          data[column].unshift({
             id: highestId,
             value: getRandomLetter(),
             color: getRandomColor()
-          };
+          });
           highestId += 1;
-          missingFromColumns[column] -= 1;
         }
       }
     }
-  };
-
-  var moveOtherTilesDown = function(column) {
-    for(var i = 0; i < totalRows - 1; i += 1) {
-      if (data[column] && isEmptyTile(data[column][i]) ) {
-        data[column][i] = data[column][i + 1];
-        data[column][i + 1].id = undefined;
-      }
-    }
-  };
-
-  var isEmptyTile = function(tile) {
-    return tile === undefined || tile.id === undefined;
   };
 
   var removeData = function(d) {
@@ -96,8 +74,7 @@ var game = function() {
       row = d[i].row;
       column = d[i].column;
       if (data && data[d[i].column] && data[d[i].column][d[i].row]) {
-        missingFromColumns[d[i].column] += 1;
-        data[d[i].column][d[i].row] = {};
+        data[d[i].column].splice(d[i].row, 1);
       }
     }
   };
@@ -111,6 +88,9 @@ var game = function() {
     for(column in oldData) {
       for(row in oldData[column]) {
         newObject = oldData[column][row];
+        if (!newObject) {
+          newObject = {};
+        }
         newObject.row = parseInt(row);
         newObject.column = parseInt(column);
         newObject = oldData[column][row];

@@ -45,26 +45,25 @@ describe("game", function() {
 			[
 				[
 					{value: 'A'},
-				], [
 					{value: 'B'}
 				]
 			]
 		);
 		game.removeData([{row: 0, column: 0}]);
-		expect(game.getData()[0][0]).to.deep.equal({});
+		expect(game.getData()[0][0]).to.deep.equal({value: 'B'});
 	});
 	it("should be able to add data", function() {
-		game.setData(
+		game.setData([
 			[
-				[
-					{id: 4},
-				], [
-					{id: 5}
-				]
+				{id: 4},
+				{id: 5},
+				{id: 15},
+				{id: 10},
+				{id: 1},
 			]
-		);
-		game.removeData([{row: 0, column: 0}]);
-		expect(game.getData()[0][0]).to.deep.equal({});
+		]);
+		game.addData();
+		expect(game.getData()[0][0].id).to.be.a("number");
 	});
 	it("should be able to convert data", function() {
 		var oldData = [
