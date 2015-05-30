@@ -28,6 +28,18 @@ d3.chart('word-up', {
 
     this._layer = this.base.append('g');
 
+    _Chart.transform = function(data) {
+      d3.select('body').on('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          d3.selectAll('rect').classed('selected', false);
+          _Chart.trigger('wordCreated', _.uniq(selectedLetters));
+        }
+      });
+
+      return data;
+    };
+
     _Chart.layer('bars', this._layer, {
         dataBind: function(data) {
           return this.selectAll('.letterGroup')
@@ -53,13 +65,6 @@ d3.chart('word-up', {
             selectedLetters = [d];
             d3.select(this).select('rect').classed('selected', true);
             isDragging = true;
-          })
-          .on('mouseup', function() {
-            if (isDragging) {
-              isDragging = false;
-              d3.selectAll('rect').classed('selected', false);
-              _Chart.trigger('wordCreated', _.uniq(selectedLetters));
-            }
           })
           .on('mousemove', function(d) {
             if (d.row > 3) {
