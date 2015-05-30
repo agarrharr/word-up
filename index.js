@@ -1,6 +1,7 @@
 var game = function() {
   var score = 0;
   var highScore = 19;
+  var data;
 
   var getScore = function() {
     return score;
@@ -14,10 +15,36 @@ var game = function() {
     score += value;
   };
 
+  var newGame = function() {
+    score = 0;
+  };
+
+  var getRandomLetter = function() {
+    var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Qu', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    var randomIndex = Math.floor(Math.random() * letters.length);
+
+    return letters[randomIndex];
+  };
+
+  var getData = function() {
+    return [
+      {
+        id: 0,
+        value: 'A',
+        row: 0,
+        column: 0,
+        color: 'red'
+      }
+    ];
+  };
+
   return {
     getScore: getScore,
     addToScore: addToScore,
-    getHighScore: getHighScore
+    getHighScore: getHighScore,
+    newGame: newGame,
+    getRandomLetter: getRandomLetter,
+    getData: getData
   };
 }();
 
