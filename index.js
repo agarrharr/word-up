@@ -1,6 +1,7 @@
 var game = function() {
   var score = 0;
   var highScore = 19;
+  var moves = 0;
   var data = [];
   var rows = 4;
   var nextRows = 2;
@@ -13,12 +14,27 @@ var game = function() {
     return score;
   };
 
+  var addToScore = function(value) {
+    score += value;
+    if (score > highScore) {
+      highScore = score;
+    }
+  };
+
   var getHighScore = function() {
     return highScore;
   };
 
-  var addToScore = function(value) {
-    score += value;
+  var setHighScore = function() {
+    return highScore;
+  };
+
+  var getMoves = function() {
+    return moves;
+  };
+
+  var addToMoves = function() {
+    moves += 1;
   };
 
   var newGame = function() {
@@ -81,6 +97,9 @@ var game = function() {
     getScore: getScore,
     addToScore: addToScore,
     getHighScore: getHighScore,
+    setHighScore: setHighScore,
+    getMoves: getMoves,
+    addToMoves: addToMoves,
     newGame: newGame,
     getRandomLetter: getRandomLetter,
     addData: addData,
@@ -115,12 +134,14 @@ chart.draw(game.getData());
 
 setupScores();
 
-chart.on('wordCreated', function(word, data) {
+chart.on('wordCreated', function(letterIds) {
+  game.removeData(letterIds);
   // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
   game.addToScore(currentScore);
   changeScoreOnPage();
-  addToMoves();
+  game.addToMoves();
+  changeMovesOnPage();
   chart.draw(game.getData());
 });
 
@@ -155,9 +176,8 @@ function getPointsForWord(word) {
   return points;
 }
 
-function addToMoves() {
-  var moves = parseInt(d3.select('#moves').html());
-  d3.select('#moves').html(moves + 1);
+function changeMovesOnPage() {
+  d3.select('#moves').html(game.getMoves());
 }
 
 function changeScoreOnPage() {
