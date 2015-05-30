@@ -51,5 +51,55 @@ describe("game", function() {
 		game.removeData([2, 0]);
 		expect(game.getData().length).to.equal(1);
 	});
+	it("show convert data", function() {
+		var oldData = {
+			0: {
+				0: {
+					id: 0,
+					value: 'A',
+					whatever: 'hi'
+				},
+				1: {
+					id: 1,
+					value: 'B'
+				}
+			},
+			1: {
+				0: {
+					id: 2,
+					value: 'X'
+				},
+				2: {
+					id: 3,
+					value: 'Y'
+				}
+			}
+		};
+		var newData = [
+			{
+				id: 0,
+				value: 'A',
+				whatever: 'hi',
+				row: '0',
+				column: '0'
+			}, {
+				id: 1,
+				value: 'B',
+				row: '1',
+				column: '0'
+			}, {
+				id: 2,
+				value: 'X',
+				row: '0',
+				column: '1'
+			}, {
+				id: 3,
+				value: 'Y',
+				row: '2',
+				column: '1'
+			}
+		];
+		expect(game.convertData(oldData)).to.be.deep.equal(newData);
+	});
 	//test that the high score changes
 });

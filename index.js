@@ -80,6 +80,27 @@ var game = function() {
     }
   };
 
+  var convertData = function(oldData) {
+    var newData = [];
+    var column;
+    var row;
+    var newObject;
+
+    for(column in oldData) {
+      for(row in oldData[column]) {
+        console.log(column, row);
+        newObject = oldData[column][row];
+        newObject.row = row;
+        newObject.column = column;
+        newData.push(newObject);
+      }
+    }
+    newData.sort(function(a, b) { return a.column > b.column && a.row > b.row; });
+    console.log(newData);
+
+    return newData;
+  };
+
   var getData = function() {
     return data;
   };
@@ -106,6 +127,7 @@ var game = function() {
     getRandomLetter: getRandomLetter,
     addData: addData,
     removeData: removeData,
+    convertData: convertData,
     getData: getData,
     setData: setData,
     getRandomColor: getRandomColor
