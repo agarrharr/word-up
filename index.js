@@ -161,22 +161,24 @@ chart.draw(data);
 setupScores();
 
 chart.on('wordCreated', function(d) {
-  game.removeData(d);
-  game.addData();
-  // var currentScore = getPointsForWord(word);
-  var currentScore = getPointsForWord('tip');
-  game.addToScore(currentScore);
-  changeScoreOnPage();
-  game.addToMoves();
-  changeMovesOnPage();
-  chart.draw(game.convertData(game.getData()));
+  if (d.length > 2) {
+    game.removeData(d);
+    game.addData();
+    var currentScore = getPointsForWord(d.length);
+    game.addToScore(currentScore);
+    game.addToMoves();
+    changeScoreOnPage();
+    changeHighScoreOnPage();
+    changeMovesOnPage();
+    chart.draw(game.convertData(game.getData()));
+  }
 });
 
 
-function getPointsForWord(word) {
+function getPointsForWord(length) {
   var points;
 
-  switch(word.length) {
+  switch(length) {
     case 3:
       points = 1;
       break;
@@ -194,9 +196,9 @@ function getPointsForWord(word) {
       break;
   }
 
-  if (word.length < 3) {
+  if (length < 3) {
     points = 0;
-  } else if (word.length > 7) {
+  } else if (length > 7) {
     points = 11;
   }
 
