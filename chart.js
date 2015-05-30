@@ -25,6 +25,7 @@ d3.chart('word-up', {
 
     var isDragging = false;
     var selectedLetters;
+    var selectedLettersIds;
 
     this._layer = this.base.append('g');
 
@@ -63,12 +64,16 @@ d3.chart('word-up', {
               return;
             }
             selectedLetters = [d];
+            selectedLettersIds = [d.id];
             d3.select(this).select('rect').classed('selected', true);
             isDragging = true;
           })
           .on('mousemove', function(d) {
             var lastLetter;
             var secondLastLetter;
+            var itsNotSelected;
+            var itsThePreviousTile;
+            var itsAdjacent;
             if (d.row > 3) {
               return;
             }
@@ -77,9 +82,13 @@ d3.chart('word-up', {
               if (selectedLetters.length > 1) {
                 secondLastLetter = selectedLetters[selectedLetters.length - 2];
               }
-              if (lastLetter.id !== d.id) {
+              itsNotSelected = selectedLettersIds.indexOf(d.id) === -1;
+              itsThePreviousTile = secondLastLetter && secondLastLetter.id === d.id;
+              itsAdjacent = Math.abs(d.row - lastLetter.row) <= 1 && Math.abs(d.column - lastLetter.column) <= 1;
+              if ((itsNotSelected && itsAdjacent) || itsThePreviousTile) {
                 if(secondLastLetter && secondLastLetter.id === d.id) {
-                  selectedLetters.pop(d);
+                  selectedLetters.pop();
+                  selectedLettersIds.pop();
                   d3.select(this.parentElement).selectAll('rect')
                     .filter(function(datum) {
                       return lastLetter.id === datum.id;
@@ -87,6 +96,7 @@ d3.chart('word-up', {
                     .classed('selected', false);
                 } else{
                   selectedLetters.push(d);
+                  selectedLettersIds.push(d.id);
                   d3.select(this).select('rect').classed('selected', true);
                 }
               }
