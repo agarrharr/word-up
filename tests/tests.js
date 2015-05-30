@@ -41,4 +41,9 @@ describe("game", function() {
 		expect(game.getData()[0].color).to.be.a("string");
 		expect(game.getData().length).to.equal(24);
 	});
+	it("should be able to remove data", function() {
+		game.setData([{id: 0}, {id: 1}, {id: 2}]);
+		game.removeData([0, 2]);
+		expect(game.getData().length).to.equal(1);
+	});
 });

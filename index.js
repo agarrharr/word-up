@@ -23,6 +23,7 @@ var game = function() {
 
   var newGame = function() {
     score = 0;
+    addData();
   };
 
   var getRandomLetter = function() {
@@ -32,7 +33,7 @@ var game = function() {
     return letters[randomIndex];
   };
 
-  var getData = function() {
+  var addData = function() {
     var numberOfTiles = columns * (totalRows);
     if (data.length !== numberOfTiles) {
       for(var i = 0; i < missingFromColumns.length; i += 1) {
@@ -42,14 +43,31 @@ var game = function() {
             value: getRandomLetter(),
             row: missingFromColumns[i] - 1,
             column: i,
-            color: 'red'
+            color: getRandomColor()
           });
           highestId += 1;
           missingFromColumns[i] -= 1;
         }
       }
     }
+  };
+
+  var removeData = function(ids) {
+    for(var i = 0; i < data.length; i += 1) {
+      for(var j = 0; j < ids.length; j += 1) {
+        if (data[i].id === ids[j]) {
+          data.splice(i, 1);
+        }
+      }
+    }
+  };
+
+  var getData = function() {
     return data;
+  };
+
+  var setData = function(value) {
+    data = value;
   };
 
   var getRandomColor = function(id) {
@@ -65,7 +83,10 @@ var game = function() {
     getHighScore: getHighScore,
     newGame: newGame,
     getRandomLetter: getRandomLetter,
+    addData: addData,
+    removeData: removeData,
     getData: getData,
+    setData: setData,
     getRandomColor: getRandomColor
   };
 }();
@@ -89,348 +110,8 @@ var group = svg.append('g')
 
 var chart = group.chart('word-up');
 
-var data = [
-  {
-    id: 0,
-    value: 'W',
-    row: 0,
-    column: 0,
-    color: game.getRandomColor(0)
-  },
-  {
-    id: 1,
-    value: 'O',
-    row: 0,
-    column: 1,
-    color: game.getRandomColor(1)
-  },
-  {
-    id: 2,
-    value: 'T',
-    row: 0,
-    column: 2,
-    color: game.getRandomColor(2)
-  },
-  {
-    id: 3,
-    value: 'Qu',
-    row: 0,
-    column: 3,
-    color: game.getRandomColor(3)
-  },
-  {
-    id: 4,
-    value: 'L',
-    row: 1,
-    column: 0,
-    color: game.getRandomColor(4)
-  },
-  {
-    id: 5,
-    value: 'S',
-    row: 1,
-    column: 1,
-    color: game.getRandomColor(5)
-  },
-  {
-    id: 6,
-    value: 'R',
-    row: 1,
-    column: 2,
-    color: game.getRandomColor(6)
-  },
-  {
-    id: 7,
-    value: 'A',
-    row: 1,
-    column: 3,
-    color: game.getRandomColor(7)
-  },
-  {
-    id: 8,
-    value: 'Y',
-    row: 2,
-    column: 0,
-    color: game.getRandomColor(8)
-  },
-  {
-    id: 9,
-    value: 'E',
-    row: 2,
-    column: 1,
-    color: game.getRandomColor(9)
-  },
-  {
-    id: 10,
-    value: 'C',
-    row: 2,
-    column: 2,
-    color: game.getRandomColor(10)
-  },
-  {
-    id: 11,
-    value: 'V',
-    row: 2,
-    column: 3,
-    color: game.getRandomColor(11)
-  },
-  {
-    id: 12,
-    value: 'T',
-    row: 3,
-    column: 0,
-    color: game.getRandomColor(12)
-  },
-  {
-    id: 13,
-    value: 'I',
-    row: 3,
-    column: 1,
-    color: game.getRandomColor(13)
-  },
-  {
-    id: 14,
-    value: 'P',
-    row: 3,
-    column: 2,
-    color: game.getRandomColor(14)
-  },
-  {
-    id: 15,
-    value: 'E',
-    row: 3,
-    column: 3,
-    color: game.getRandomColor(15)
-  },
-  {
-    id: 16,
-    value: 'A',
-    row: 4,
-    column: 0,
-    color: game.getRandomColor(16)
-  },
-  {
-    id: 17,
-    value: 'H',
-    row: 4,
-    column: 1,
-    color: game.getRandomColor(17)
-  },
-  {
-    id: 18,
-    value: 'E',
-    row: 4,
-    column: 2,
-    color: game.getRandomColor(18)
-  },
-  {
-    id: 19,
-    value: 'U',
-    row: 4,
-    column: 3,
-    color: game.getRandomColor(19)
-  },
-  {
-    id: 20,
-    value: 'C',
-    row: 5,
-    column: 0,
-    color: game.getRandomColor(20)
-  },
-  {
-    id: 21,
-    value: 'O',
-    row: 5,
-    column: 1,
-    color: game.getRandomColor(21)
-  },
-  {
-    id: 22,
-    value: 'H',
-    row: 5,
-    column: 2,
-    color: game.getRandomColor(22)
-  },
-  {
-    id: 23,
-    value: 'R',
-    row: 5,
-    column: 3,
-    color: game.getRandomColor(23)
-  }
-];
-var data2 = [
-  {
-    id: 0,
-    value: 'W',
-    row: 0,
-    column: 0,
-    color: game.getRandomColor(0)
-  },
-  {
-    id: 1,
-    value: 'O',
-    row: 0,
-    column: 1,
-    color: game.getRandomColor(1)
-  },
-  {
-    id: 2,
-    value: 'T',
-    row: 0,
-    column: 2,
-    color: game.getRandomColor(2)
-  },
-  {
-    id: 3,
-    value: 'Qu',
-    row: 0,
-    column: 3,
-    color: game.getRandomColor(3)
-  },
-  {
-    id: 4,
-    value: 'L',
-    row: 1,
-    column: 0,
-    color: game.getRandomColor(4)
-  },
-  {
-    id: 5,
-    value: 'S',
-    row: 1,
-    column: 1,
-    color: game.getRandomColor(5)
-  },
-  {
-    id: 6,
-    value: 'R',
-    row: 1,
-    column: 2,
-    color: game.getRandomColor(6)
-  },
-  {
-    id: 7,
-    value: 'A',
-    row: 1,
-    column: 3,
-    color: game.getRandomColor(7)
-  },
-  {
-    id: 8,
-    value: 'Y',
-    row: 2,
-    column: 0,
-    color: game.getRandomColor(8)
-  },
-  {
-    id: 9,
-    value: 'E',
-    row: 2,
-    column: 1,
-    color: game.getRandomColor(9)
-  },
-  {
-    id: 10,
-    value: 'C',
-    row: 2,
-    column: 2,
-    color: game.getRandomColor(10)
-  },
-  {
-    id: 11,
-    value: 'V',
-    row: 2,
-    column: 3,
-    color: game.getRandomColor(11)
-  },
-  {
-    id: 15,
-    value: 'E',
-    row: 3,
-    column: 3,
-    color: game.getRandomColor(15)
-  },
-  {
-    id: 16,
-    value: 'A',
-    row: 3,
-    column: 0,
-    color: game.getRandomColor(16)
-  },
-  {
-    id: 17,
-    value: 'H',
-    row: 3,
-    column: 1,
-    color: game.getRandomColor(17)
-  },
-  {
-    id: 18,
-    value: 'E',
-    row: 3,
-    column: 2,
-    color: game.getRandomColor(18)
-  },
-  {
-    id: 19,
-    value: 'U',
-    row: 4,
-    column: 3,
-    color: game.getRandomColor(19)
-  },
-  {
-    id: 20,
-    value: 'C',
-    row: 4,
-    column: 0,
-    color: game.getRandomColor(20)
-  },
-  {
-    id: 21,
-    value: 'O',
-    row: 4,
-    column: 1,
-    color: game.getRandomColor(21)
-  },
-  {
-    id: 22,
-    value: 'H',
-    row: 4,
-    column: 2,
-    color: game.getRandomColor(22)
-  },
-  {
-    id: 23,
-    value: 'R',
-    row: 5,
-    column: 3,
-    color: game.getRandomColor(23)
-  },
-  {
-    id: 24,
-    value: 'S',
-    row: 5,
-    column: 0,
-    color: game.getRandomColor(24)
-  },
-  {
-    id: 25,
-    value: 'I',
-    row: 5,
-    column: 1,
-    color: game.getRandomColor(25)
-  },
-  {
-    id: 26,
-    value: 'A',
-    row: 5,
-    column: 2,
-    color: game.getRandomColor(26)
-  }
-];
-
-chart.draw(data);
+game.newGame();
+chart.draw(game.getData());
 
 setupScores();
 
@@ -440,7 +121,7 @@ chart.on('wordCreated', function(word, data) {
   game.addToScore(currentScore);
   changeScoreOnPage();
   addToMoves();
-  chart.draw(data2);
+  chart.draw(game.getData());
 });
 
 
