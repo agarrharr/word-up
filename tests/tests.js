@@ -1,4 +1,7 @@
 describe("game", function() {
+	beforeEach(function() {
+		game.newGame();
+	});
 	it("should exist", function() {
 		expect(game).to.exist;
 	});
@@ -12,7 +15,27 @@ describe("game", function() {
 		game.addToScore(1);
 		expect(game.getScore()).to.equal(1);
 	});
+	it("should be reset game", function() {
+		game.addToScore(1);
+		game.newGame();
+		expect(game.getScore()).to.equal(0);
+	});
 	it("should be able to get high score", function() {
 		expect(game.getHighScore()).to.be.a("number");
+	});
+	it("should be able to get a random letter", function() {
+		expect(game.getRandomLetter()).to.be.a("string");
+		expect(game.getRandomLetter().length).to.be.below(3);
+	});
+	it("should be able to get random data", function() {
+		expect(game.getData()).to.be.an("array");
+		expect(game.getData()[0]).to.be.an("object");
+		expect(game.getData()[0].id).to.be.a("number");
+		expect(game.getData()[0].value).to.be.a("string");
+		expect(game.getData()[0].row).to.be.a("number");
+		expect(game.getData()[0].column).to.be.a("number");
+		expect(game.getData()[0].color).to.be.a("string");
+	});
+	it("should be able to get random data", function() {
 	});
 });
