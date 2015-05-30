@@ -27,6 +27,10 @@ describe("game", function() {
 		expect(game.getRandomLetter()).to.be.a("string");
 		expect(game.getRandomLetter().length).to.be.below(3);
 	});
+	it("should be able to get random color", function() {
+		expect(game.getRandomColor()).to.be.a("string");
+		expect(game.getRandomColor().length).to.equal(7);
+	});
 	it("should be able to get random data", function() {
 		expect(game.getData()).to.be.an("array");
 		expect(game.getData()[0]).to.be.an("object");
@@ -35,7 +39,6 @@ describe("game", function() {
 		expect(game.getData()[0].row).to.be.a("number");
 		expect(game.getData()[0].column).to.be.a("number");
 		expect(game.getData()[0].color).to.be.a("string");
-	});
-	it("should be able to get random data", function() {
+		expect(game.getData().length).to.equal(24);
 	});
 });

@@ -1,7 +1,13 @@
 var game = function() {
   var score = 0;
   var highScore = 19;
-  var data;
+  var data = [];
+  var rows = 4;
+  var nextRows = 2;
+  var totalRows = rows + nextRows;
+  var columns = 4;
+  var highestId = 0;
+  var missingFromColumns = [6, 6, 6, 6];
 
   var getScore = function() {
     return score;
@@ -27,15 +33,30 @@ var game = function() {
   };
 
   var getData = function() {
-    return [
-      {
-        id: 0,
-        value: 'A',
-        row: 0,
-        column: 0,
-        color: 'red'
+    var numberOfTiles = columns * (totalRows);
+    if (data.length !== numberOfTiles) {
+      for(var i = 0; i < missingFromColumns.length; i += 1) {
+        while(missingFromColumns[i] > 0) {
+          data.push({
+            id: highestId,
+            value: getRandomLetter(),
+            row: missingFromColumns[i] - 1,
+            column: i,
+            color: 'red'
+          });
+          highestId += 1;
+          missingFromColumns[i] -= 1;
+        }
       }
-    ];
+    }
+    return data;
+  };
+
+  var getRandomColor = function(id) {
+    var colors = ['#F75168', '#678FC1', '#b5577e', '#1DAD7C', '#F98D3F'];
+    var randomIndex = Math.floor(Math.random() * colors.length);
+
+    return colors[randomIndex];
   };
 
   return {
@@ -44,11 +65,10 @@ var game = function() {
     getHighScore: getHighScore,
     newGame: newGame,
     getRandomLetter: getRandomLetter,
-    getData: getData
+    getData: getData,
+    getRandomColor: getRandomColor
   };
 }();
-
-var savedColors = [];
 
 var padding = 50;
 var strokeWidth = 5;
@@ -75,168 +95,168 @@ var data = [
     value: 'W',
     row: 0,
     column: 0,
-    color: getRandomColor(0)
+    color: game.getRandomColor(0)
   },
   {
     id: 1,
     value: 'O',
     row: 0,
     column: 1,
-    color: getRandomColor(1)
+    color: game.getRandomColor(1)
   },
   {
     id: 2,
     value: 'T',
     row: 0,
     column: 2,
-    color: getRandomColor(2)
+    color: game.getRandomColor(2)
   },
   {
     id: 3,
     value: 'Qu',
     row: 0,
     column: 3,
-    color: getRandomColor(3)
+    color: game.getRandomColor(3)
   },
   {
     id: 4,
     value: 'L',
     row: 1,
     column: 0,
-    color: getRandomColor(4)
+    color: game.getRandomColor(4)
   },
   {
     id: 5,
     value: 'S',
     row: 1,
     column: 1,
-    color: getRandomColor(5)
+    color: game.getRandomColor(5)
   },
   {
     id: 6,
     value: 'R',
     row: 1,
     column: 2,
-    color: getRandomColor(6)
+    color: game.getRandomColor(6)
   },
   {
     id: 7,
     value: 'A',
     row: 1,
     column: 3,
-    color: getRandomColor(7)
+    color: game.getRandomColor(7)
   },
   {
     id: 8,
     value: 'Y',
     row: 2,
     column: 0,
-    color: getRandomColor(8)
+    color: game.getRandomColor(8)
   },
   {
     id: 9,
     value: 'E',
     row: 2,
     column: 1,
-    color: getRandomColor(9)
+    color: game.getRandomColor(9)
   },
   {
     id: 10,
     value: 'C',
     row: 2,
     column: 2,
-    color: getRandomColor(10)
+    color: game.getRandomColor(10)
   },
   {
     id: 11,
     value: 'V',
     row: 2,
     column: 3,
-    color: getRandomColor(11)
+    color: game.getRandomColor(11)
   },
   {
     id: 12,
     value: 'T',
     row: 3,
     column: 0,
-    color: getRandomColor(12)
+    color: game.getRandomColor(12)
   },
   {
     id: 13,
     value: 'I',
     row: 3,
     column: 1,
-    color: getRandomColor(13)
+    color: game.getRandomColor(13)
   },
   {
     id: 14,
     value: 'P',
     row: 3,
     column: 2,
-    color: getRandomColor(14)
+    color: game.getRandomColor(14)
   },
   {
     id: 15,
     value: 'E',
     row: 3,
     column: 3,
-    color: getRandomColor(15)
+    color: game.getRandomColor(15)
   },
   {
     id: 16,
     value: 'A',
     row: 4,
     column: 0,
-    color: getRandomColor(16)
+    color: game.getRandomColor(16)
   },
   {
     id: 17,
     value: 'H',
     row: 4,
     column: 1,
-    color: getRandomColor(17)
+    color: game.getRandomColor(17)
   },
   {
     id: 18,
     value: 'E',
     row: 4,
     column: 2,
-    color: getRandomColor(18)
+    color: game.getRandomColor(18)
   },
   {
     id: 19,
     value: 'U',
     row: 4,
     column: 3,
-    color: getRandomColor(19)
+    color: game.getRandomColor(19)
   },
   {
     id: 20,
     value: 'C',
     row: 5,
     column: 0,
-    color: getRandomColor(20)
+    color: game.getRandomColor(20)
   },
   {
     id: 21,
     value: 'O',
     row: 5,
     column: 1,
-    color: getRandomColor(21)
+    color: game.getRandomColor(21)
   },
   {
     id: 22,
     value: 'H',
     row: 5,
     column: 2,
-    color: getRandomColor(22)
+    color: game.getRandomColor(22)
   },
   {
     id: 23,
     value: 'R',
     row: 5,
     column: 3,
-    color: getRandomColor(23)
+    color: game.getRandomColor(23)
   }
 ];
 var data2 = [
@@ -245,168 +265,168 @@ var data2 = [
     value: 'W',
     row: 0,
     column: 0,
-    color: getRandomColor(0)
+    color: game.getRandomColor(0)
   },
   {
     id: 1,
     value: 'O',
     row: 0,
     column: 1,
-    color: getRandomColor(1)
+    color: game.getRandomColor(1)
   },
   {
     id: 2,
     value: 'T',
     row: 0,
     column: 2,
-    color: getRandomColor(2)
+    color: game.getRandomColor(2)
   },
   {
     id: 3,
     value: 'Qu',
     row: 0,
     column: 3,
-    color: getRandomColor(3)
+    color: game.getRandomColor(3)
   },
   {
     id: 4,
     value: 'L',
     row: 1,
     column: 0,
-    color: getRandomColor(4)
+    color: game.getRandomColor(4)
   },
   {
     id: 5,
     value: 'S',
     row: 1,
     column: 1,
-    color: getRandomColor(5)
+    color: game.getRandomColor(5)
   },
   {
     id: 6,
     value: 'R',
     row: 1,
     column: 2,
-    color: getRandomColor(6)
+    color: game.getRandomColor(6)
   },
   {
     id: 7,
     value: 'A',
     row: 1,
     column: 3,
-    color: getRandomColor(7)
+    color: game.getRandomColor(7)
   },
   {
     id: 8,
     value: 'Y',
     row: 2,
     column: 0,
-    color: getRandomColor(8)
+    color: game.getRandomColor(8)
   },
   {
     id: 9,
     value: 'E',
     row: 2,
     column: 1,
-    color: getRandomColor(9)
+    color: game.getRandomColor(9)
   },
   {
     id: 10,
     value: 'C',
     row: 2,
     column: 2,
-    color: getRandomColor(10)
+    color: game.getRandomColor(10)
   },
   {
     id: 11,
     value: 'V',
     row: 2,
     column: 3,
-    color: getRandomColor(11)
+    color: game.getRandomColor(11)
   },
   {
     id: 15,
     value: 'E',
     row: 3,
     column: 3,
-    color: getRandomColor(15)
+    color: game.getRandomColor(15)
   },
   {
     id: 16,
     value: 'A',
     row: 3,
     column: 0,
-    color: getRandomColor(16)
+    color: game.getRandomColor(16)
   },
   {
     id: 17,
     value: 'H',
     row: 3,
     column: 1,
-    color: getRandomColor(17)
+    color: game.getRandomColor(17)
   },
   {
     id: 18,
     value: 'E',
     row: 3,
     column: 2,
-    color: getRandomColor(18)
+    color: game.getRandomColor(18)
   },
   {
     id: 19,
     value: 'U',
     row: 4,
     column: 3,
-    color: getRandomColor(19)
+    color: game.getRandomColor(19)
   },
   {
     id: 20,
     value: 'C',
     row: 4,
     column: 0,
-    color: getRandomColor(20)
+    color: game.getRandomColor(20)
   },
   {
     id: 21,
     value: 'O',
     row: 4,
     column: 1,
-    color: getRandomColor(21)
+    color: game.getRandomColor(21)
   },
   {
     id: 22,
     value: 'H',
     row: 4,
     column: 2,
-    color: getRandomColor(22)
+    color: game.getRandomColor(22)
   },
   {
     id: 23,
     value: 'R',
     row: 5,
     column: 3,
-    color: getRandomColor(23)
+    color: game.getRandomColor(23)
   },
   {
     id: 24,
     value: 'S',
     row: 5,
     column: 0,
-    color: getRandomColor(24)
+    color: game.getRandomColor(24)
   },
   {
     id: 25,
     value: 'I',
     row: 5,
     column: 1,
-    color: getRandomColor(25)
+    color: game.getRandomColor(25)
   },
   {
     id: 26,
     value: 'A',
     row: 5,
     column: 2,
-    color: getRandomColor(26)
+    color: game.getRandomColor(26)
   }
 ];
 
@@ -452,16 +472,6 @@ function getPointsForWord(word) {
   }
 
   return points;
-}
-
-function getRandomColor(id) {
-  var colors = ['#F75168', '#678FC1', '#b5577e', '#1DAD7C', '#F98D3F'];
-  var randomIndex = Math.floor(Math.random() * colors.length);
-
-  if (savedColors[id] === undefined) {
-    savedColors[id] = colors[randomIndex];
-  }
-  return savedColors[id];
 }
 
 function addToMoves() {
