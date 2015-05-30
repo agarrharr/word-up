@@ -67,13 +67,28 @@ d3.chart('word-up', {
             isDragging = true;
           })
           .on('mousemove', function(d) {
+            var lastLetter;
+            var secondLastLetter;
             if (d.row > 3) {
               return;
             }
             if (isDragging) {
-              if (selectedLetters[selectedLetters.length - 1].id !== d.id) {
-                selectedLetters.push(d);
-                d3.select(this).select('rect').classed('selected', true);
+              lastLetter = selectedLetters[selectedLetters.length - 1];
+              if (selectedLetters.length > 1) {
+                secondLastLetter = selectedLetters[selectedLetters.length - 2];
+              }
+              if (lastLetter.id !== d.id) {
+                if(secondLastLetter && secondLastLetter.id === d.id) {
+                  selectedLetters.pop(d);
+                  d3.select(this.parentElement).selectAll('rect')
+                    .filter(function(datum) {
+                      return lastLetter.id === datum.id;
+                    })
+                    .classed('selected', false);
+                } else{
+                  selectedLetters.push(d);
+                  d3.select(this).select('rect').classed('selected', true);
+                }
               }
             }
           });
