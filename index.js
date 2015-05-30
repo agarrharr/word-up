@@ -143,9 +143,8 @@ var tileSize = height / 6;
 var tileLargeSpace = tileSize * 0.8;
 
 
-var element = d3.select('#game').node();
-element.onselectstart = function(){ return false; };
-element.onmousedown = function(){ return false; };
+preventScrollingOnPage();
+preventHighlightingLetters();
 
 var svg = d3.select('#game')
   .append('svg')
@@ -225,4 +224,17 @@ function changeHighScoreOnPage() {
 function setupScores() {
   changeScoreOnPage();
   changeHighScoreOnPage();
+}
+
+function preventScrollingOnPage() {
+  d3.select(document).node().addEventListener('touchstart', function(e) {
+    e.preventDefault();
+  });
+}
+
+function preventHighlightingLetters() {
+  var element = d3.select('#game').node();
+
+  element.onselectstart = function(){ return false; };
+  element.onmousedown = function(){ return false; };
 }
