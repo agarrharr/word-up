@@ -91,7 +91,8 @@ d3.chart('word-up', {
               return d.value;
             },
             'font-size': fontSize,
-            'text-anchor': 'middle'
+            'text-anchor': 'middle',
+            'pointer-events': 'none'
           });
 
         return this;
