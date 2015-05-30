@@ -7,6 +7,8 @@ d3.chart('word-up', {
     _Chart.height = 800;
 
     var padding = 10;
+    var rows = 4;
+    var initialDelayTime = 100;
     var tileSize = (_Chart.height / 6) - padding;
     var fontSize = tileSize * 0.6;
     var yPos = function(d, i) {
@@ -96,7 +98,7 @@ d3.chart('word-up', {
         this.transition()
           .delay(function(d) {
             if (isInitialAnimation) {
-              return 100 * d.id;
+              return initialDelayTime * ((d.row * rows) + d.column);
             } else {
               return 0;
             }
