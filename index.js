@@ -63,6 +63,7 @@ var game = function() {
           if (!data[column][row]) {
             data[column][row] = [];
           }
+          moveOtherTilesDown();
           data[column][row] = {
             id: highestId,
             value: getRandomLetter(),
@@ -73,6 +74,19 @@ var game = function() {
         }
       }
     }
+  };
+
+  var moveOtherTilesDown = function(column) {
+    for(var i = 0; i < totalRows - 1; i += 1) {
+      if (data[column] && isEmptyTile(data[column][i]) ) {
+        data[column][i] = data[column][i + 1];
+        data[column][i + 1].id = undefined;
+      }
+    }
+  };
+
+  var isEmptyTile = function(tile) {
+    return tile === undefined || tile.id === undefined;
   };
 
   var removeData = function(d) {
@@ -99,10 +113,11 @@ var game = function() {
         newObject = oldData[column][row];
         newObject.row = parseInt(row);
         newObject.column = parseInt(column);
+        newObject = oldData[column][row];
         newData.push(newObject);
       }
     }
-    newData.sort(function(a, b) { return a.column > b.column && a.row > b.row; });
+    // newData.sort(function(a, b) { return a.column > b.column && a.row > b.row; });
 
     return newData;
   };
@@ -168,7 +183,7 @@ setupScores();
 chart.on('wordCreated', function(d) {
   game.removeData(d);
   game.addData();
-  // // var currentScore = getPointsForWord(word);
+  // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
   game.addToScore(currentScore);
   changeScoreOnPage();
