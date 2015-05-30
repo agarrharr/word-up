@@ -11,8 +11,8 @@ d3.chart('word-up', {
     var initialDelayTime = 100;
     var tileSize = (_Chart.height / 6) - padding;
     var fontSize = tileSize * 0.6;
-    var yPos = function(d, i) {
-      if (i >= 16) {
+    var yPos = function(d) {
+      if (d.row > 3) {
         return _Chart.height - tileSize - (d.row * (tileSize + padding));
       } else {
         return _Chart.height - tileSize + (tileSize * 0.75) - (d.row * (tileSize + padding));
@@ -46,7 +46,7 @@ d3.chart('word-up', {
         });
 
 
-        this.on('mousedown', function(d, i) {
+        this.on('mousedown', function(d) {
             if (d.row > 3) {
               return;
             }
@@ -106,8 +106,8 @@ d3.chart('word-up', {
           .duration(750)
           .ease('bounce')
           .attr({
-            'transform': function(d, i) {
-              return 'translate(' + xPos(d) + ', ' + yPos(d, i) + ')';
+            'transform': function(d) {
+              return 'translate(' + xPos(d) + ', ' + yPos(d) + ')';
             }
           });
 
@@ -138,8 +138,8 @@ d3.chart('word-up', {
         this.transition()
           .duration(750)
           .attr({
-            'transform': function(d, i) {
-              return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + (yPos(d, i) + (tileSize * 1.5)) + '), rotate( 20 )';
+            'transform': function(d) {
+              return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + (yPos(d) + (tileSize * 1.5)) + '), rotate( 20 )';
             }
           })
           .style('opacity', 0)
