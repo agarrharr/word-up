@@ -69,8 +69,8 @@ var game = function() {
   };
 
   var removeData = function(ids) {
-    for(var i = 0; i < data.length; i += 1) {
-      for(var j = 0; j < ids.length; j += 1) {
+    for(var j = 0; j < ids.length; j += 1) {
+      for(var i = 0; i < data.length; i += 1) {
         if (data[i].id === ids[j]) {
           data.splice(i, 1);
         }

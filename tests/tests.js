@@ -46,5 +46,10 @@ describe("game", function() {
 		game.removeData([0, 2]);
 		expect(game.getData().length).to.equal(1);
 	});
+	it("should be able to remove data even if it's in the wrong order", function() {
+		game.setData([{id: 0}, {id: 1}, {id: 2}]);
+		game.removeData([2, 0]);
+		expect(game.getData().length).to.equal(1);
+	});
 	//test that the high score changes
 });
