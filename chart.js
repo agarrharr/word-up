@@ -50,7 +50,8 @@ d3.chart('word-up', {
             if (d.row > 3) {
               return;
             }
-            selectedLetters = [];
+            selectedLetters = [d.id];
+            d3.select(this).select('rect').classed('selected', true);
             isDragging = true;
           })
           .on('mouseup', function() {
