@@ -45,8 +45,7 @@ describe("game", function() {
 			[
 				[
 					{value: 'A'},
-				],
-				[
+				], [
 					{value: 'B'}
 				]
 			]
@@ -54,35 +53,40 @@ describe("game", function() {
 		game.removeData([{row: 0, column: 0}]);
 		expect(game.getData()[0][0]).to.deep.equal({});
 	});
-	// it("should be able to remove data even if it's in the wrong order", function() {
-	// 	game.setData([{id: 0}, {id: 1}, {id: 2}]);
-	// 	game.removeData([2, 0]);
-	// 	expect(game.getData().length).to.equal(1);
-	// });
-	it("show convert data", function() {
-		var oldData = {
-			0: {
-				0: {
+	it("should be able to add data", function() {
+		game.setData(
+			[
+				[
+					{id: 4},
+				], [
+					{id: 5}
+				]
+			]
+		);
+		game.removeData([{row: 0, column: 0}]);
+		expect(game.getData()[0][0]).to.deep.equal({});
+	});
+	it("should be able to convert data", function() {
+		var oldData = [
+			[
+				{
 					id: 0,
 					value: 'A',
 					whatever: 'hi'
-				},
-				1: {
+				}, {
 					id: 1,
 					value: 'B'
 				}
-			},
-			1: {
-				0: {
+			], [
+				{
 					id: 2,
 					value: 'X'
-				},
-				2: {
+				}, {
 					id: 3,
 					value: 'Y'
 				}
-			}
-		};
+			]
+		];
 		var newData = [
 			{
 				id: 0,
@@ -103,11 +107,13 @@ describe("game", function() {
 			}, {
 				id: 3,
 				value: 'Y',
-				row: 2,
+				row: 1,
 				column: 1
 			}
 		];
-		expect(game.convertData(oldData)).to.be.deep.equal(newData);
+		var convertedData = game.convertData(oldData);
+		console.log(convertedData[0].id);
+		expect(convertedData).to.be.deep.equal(newData);
 	});
 	//test that the high score changes
 });
