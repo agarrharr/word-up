@@ -75,13 +75,15 @@ var game = function() {
     }
   };
 
-  var removeData = function(ids) {
-    for(var j = 0; j < ids.length; j += 1) {
-      for(var i = 0; i < data.length; i += 1) {
-        if (data[i].id === ids[j]) {
-          missingFromColumns[data[i].column] += 1;
-          data.splice(i, 1);
-        }
+  var removeData = function(d) {
+    var row;
+    var column;
+    for(var i = 0; i < d.length; i += 1) {
+      row = d[i].row;
+      column = d[i].column;
+      if (data && data[d[i].column] && data[d[i].column][d[i].row]) {
+        missingFromColumns[d[i].column] += 1;
+        data[d[i].column][d[i].row] = {};
       }
     }
   };
@@ -163,10 +165,10 @@ chart.draw(data);
 
 setupScores();
 
-chart.on('wordCreated', function(letterIds) {
-  game.removeData(letterIds);
+chart.on('wordCreated', function(d) {
+  game.removeData(d);
   game.addData();
-  // var currentScore = getPointsForWord(word);
+  // // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
   game.addToScore(currentScore);
   changeScoreOnPage();

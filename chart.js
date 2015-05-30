@@ -50,7 +50,7 @@ d3.chart('word-up', {
             if (d.row > 3) {
               return;
             }
-            selectedLetters = [d.id];
+            selectedLetters = [d];
             d3.select(this).select('rect').classed('selected', true);
             isDragging = true;
           })
@@ -66,7 +66,7 @@ d3.chart('word-up', {
               return;
             }
             if (isDragging) {
-              selectedLetters.push(d.id);
+              selectedLetters.push(d);
               d3.select(this).select('rect').classed('selected', true);
             }
           });

@@ -41,15 +41,24 @@ describe("game", function() {
 		expect(game.getData()[0][0].color).to.be.a("string");
 	});
 	it("should be able to remove data", function() {
-		game.setData([{id: 0}, {id: 1}, {id: 2}]);
-		game.removeData([0, 2]);
-		expect(game.getData().length).to.equal(1);
+		game.setData(
+			[
+				[
+					{value: 'A'},
+				],
+				[
+					{value: 'B'}
+				]
+			]
+		);
+		game.removeData([{row: 0, column: 0}]);
+		expect(game.getData()[0][0]).to.deep.equal({});
 	});
-	it("should be able to remove data even if it's in the wrong order", function() {
-		game.setData([{id: 0}, {id: 1}, {id: 2}]);
-		game.removeData([2, 0]);
-		expect(game.getData().length).to.equal(1);
-	});
+	// it("should be able to remove data even if it's in the wrong order", function() {
+	// 	game.setData([{id: 0}, {id: 1}, {id: 2}]);
+	// 	game.removeData([2, 0]);
+	// 	expect(game.getData().length).to.equal(1);
+	// });
 	it("show convert data", function() {
 		var oldData = {
 			0: {
