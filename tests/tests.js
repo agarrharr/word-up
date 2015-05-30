@@ -63,7 +63,9 @@ describe("game", function() {
 			]
 		]);
 		game.addData();
+		expect(game.getData()[0][5].id).to.be.a("number");
 		expect(game.getData()[0][0].id).to.be.a("number");
+		expect(game.getData()[0][0].id).to.equal(4);
 	});
 	it("should be able to convert data", function() {
 		var oldData = [
