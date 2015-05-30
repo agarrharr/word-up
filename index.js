@@ -56,7 +56,7 @@ var game = function() {
           data[column] = [];
         }
         while (data[column].length < totalRows) {
-          data[column].unshift({
+          data[column].push({
             id: highestId,
             value: getRandomLetter(),
             color: getRandomColor()
