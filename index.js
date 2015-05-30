@@ -1,9 +1,26 @@
 var game = function() {
-  return 2;
-};
+  var score = 0;
+  var highScore = 19;
 
-var score = 0;
-var highScore = 19;
+  var getScore = function() {
+    return score;
+  };
+
+  var getHighScore = function() {
+    return highScore;
+  };
+
+  var addToScore = function(value) {
+    score += value;
+  };
+
+  return {
+    getScore: getScore,
+    addToScore: addToScore,
+    getHighScore: getHighScore
+  };
+}();
+
 var savedColors = [];
 
 var padding = 50;
@@ -373,7 +390,8 @@ setupScores();
 chart.on('wordCreated', function(word, data) {
   // var currentScore = getPointsForWord(word);
   var currentScore = getPointsForWord('tip');
-  addToScore(currentScore);
+  game.addToScore(currentScore);
+  changeScoreOnPage();
   addToMoves();
   chart.draw(data2);
 });
@@ -424,17 +442,15 @@ function addToMoves() {
   d3.select('#moves').html(moves + 1);
 }
 
-function addToScore(newScore) {
-  score += newScore;
-  d3.select('#score').html(score);
+function changeScoreOnPage() {
+  d3.select('#score').html(game.getScore());
 }
 
-function addToHighScore(newScore) {
-  highScore += newScore;
-  d3.select('#highScore').html(highScore);
+function changeHighScoreOnPage() {
+  d3.select('#highScore').html(game.getHighScore());
 }
 
 function setupScores() {
-  d3.select('#score').html(score);
-  d3.select('#highScore').html(highScore);
+  changeScoreOnPage();
+  changeHighScoreOnPage();
 }
