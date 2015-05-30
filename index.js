@@ -142,6 +142,11 @@ var width = 600;
 var tileSize = height / 6;
 var tileLargeSpace = tileSize * 0.8;
 
+
+var element = d3.select('#game').node();
+element.onselectstart = function(){ return false; };
+element.onmousedown = function(){ return false; };
+
 var svg = d3.select('#game')
   .append('svg')
   .attr({
