@@ -33,7 +33,7 @@ d3.chart('word-up', {
         if (isDragging) {
           isDragging = false;
           d3.selectAll('rect').classed('selected', false);
-          _Chart.trigger('wordCreated', _.uniq(selectedLetters));
+          _Chart.trigger('wordCreated', selectedLetters);
         }
       });
 
@@ -71,8 +71,10 @@ d3.chart('word-up', {
               return;
             }
             if (isDragging) {
-              selectedLetters.push(d);
-              d3.select(this).select('rect').classed('selected', true);
+              if (selectedLetters[selectedLetters.length - 1].id !== d.id) {
+                selectedLetters.push(d);
+                d3.select(this).select('rect').classed('selected', true);
+              }
             }
           });
 
