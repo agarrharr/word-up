@@ -33,13 +33,12 @@ describe("game", function() {
 	});
 	it("should be able to get random data", function() {
 		expect(game.getData()).to.be.an("array");
-		expect(game.getData()[0]).to.be.an("object");
-		expect(game.getData()[0].id).to.be.a("number");
-		expect(game.getData()[0].value).to.be.a("string");
-		expect(game.getData()[0].row).to.be.a("number");
-		expect(game.getData()[0].column).to.be.a("number");
-		expect(game.getData()[0].color).to.be.a("string");
-		expect(game.getData().length).to.equal(24);
+		expect(game.getData()[0]).to.be.an("array");
+		expect(game.getData().length).to.equal(4);
+		expect(game.getData()[0].length).to.equal(6);
+		expect(game.getData()[0][0].id).to.be.a("number");
+		expect(game.getData()[0][0].value).to.be.a("string");
+		expect(game.getData()[0][0].color).to.be.a("string");
 	});
 	it("should be able to remove data", function() {
 		game.setData([{id: 0}, {id: 1}, {id: 2}]);
@@ -80,23 +79,23 @@ describe("game", function() {
 				id: 0,
 				value: 'A',
 				whatever: 'hi',
-				row: '0',
-				column: '0'
+				row: 0,
+				column: 0
 			}, {
 				id: 1,
 				value: 'B',
-				row: '1',
-				column: '0'
+				row: 1,
+				column: 0
 			}, {
 				id: 2,
 				value: 'X',
-				row: '0',
-				column: '1'
+				row: 0,
+				column: 1
 			}, {
 				id: 3,
 				value: 'Y',
-				row: '2',
-				column: '1'
+				row: 2,
+				column: 1
 			}
 		];
 		expect(game.convertData(oldData)).to.be.deep.equal(newData);

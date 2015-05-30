@@ -51,19 +51,25 @@ var game = function() {
   };
 
   var addData = function() {
+    var row;
     var numberOfTiles = columns * (totalRows);
     if (data.length !== numberOfTiles) {
-      for(var i = 0; i < missingFromColumns.length; i += 1) {
-        while(missingFromColumns[i] > 0) {
-          data.push({
+      for(var column = 0; column < missingFromColumns.length; column += 1) {
+        while(missingFromColumns[column] > 0) {
+          row = totalRows - (missingFromColumns[column]);
+          if (!data[column]) {
+            data[column] = [];
+          }
+          if (!data[column][row]) {
+            data[column][row] = [];
+          }
+          data[column][row] = {
             id: highestId,
             value: getRandomLetter(),
-            row: totalRows - (missingFromColumns[i]),
-            column: i,
             color: getRandomColor()
-          });
+          };
           highestId += 1;
-          missingFromColumns[i] -= 1;
+          missingFromColumns[column] -= 1;
         }
       }
     }
@@ -88,15 +94,13 @@ var game = function() {
 
     for(column in oldData) {
       for(row in oldData[column]) {
-        console.log(column, row);
         newObject = oldData[column][row];
-        newObject.row = row;
-        newObject.column = column;
+        newObject.row = parseInt(row);
+        newObject.column = parseInt(column);
         newData.push(newObject);
       }
     }
     newData.sort(function(a, b) { return a.column > b.column && a.row > b.row; });
-    console.log(newData);
 
     return newData;
   };
@@ -154,7 +158,8 @@ var group = svg.append('g')
 var chart = group.chart('word-up');
 
 game.newGame();
-chart.draw(game.getData());
+var data = game.convertData(game.getData());
+chart.draw(data);
 
 setupScores();
 
@@ -167,7 +172,7 @@ chart.on('wordCreated', function(letterIds) {
   changeScoreOnPage();
   game.addToMoves();
   changeMovesOnPage();
-  chart.draw(game.getData());
+  chart.draw(game.convertData(game.getData()));
 });
 
 
