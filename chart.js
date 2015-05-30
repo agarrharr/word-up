@@ -57,7 +57,7 @@ d3.chart('word-up', {
             if (isDragging) {
               isDragging = false;
               d3.selectAll('rect').classed('selected', false);
-              _Chart.trigger('wordCreated', selectedLetters);
+              _Chart.trigger('wordCreated', _.uniq(selectedLetters));
             }
           })
           .on('mousemove', function(d) {
