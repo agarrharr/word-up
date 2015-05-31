@@ -18,8 +18,7 @@ module.exports = function(config) {
       'tests/*.js',
       'bower_components/d3/d3.min.js',
       'bower_components/d3.chart/d3.chart.min.js',
-      'chart.js',
-      'index.js'
+      'game.js'
     ],
 
 
