@@ -4,7 +4,7 @@
   "description": "It's not quite working yet, but there is a demo to get an idea of how it would work.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
@@ -24,11 +24,10 @@
     "karma-chai": "~0.1.0",
     "karma-chrome-launcher": "~0.1.12",
     "karma-firefox-launcher": "~0.1.6",
-    "karma-safari-launcher": "~0.1.1",
     "karma-mocha": "~0.1.10",
-    "karma-requirejs": "~0.2.2"
-  },
-  "scripts": {
-     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-requirejs": "~0.2.2",
+    "karma-safari-launcher": "~0.1.1",
+    "phantomjs": "~1.9.17"
   }
 }
