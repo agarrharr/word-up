@@ -57,15 +57,6 @@ d3.chart('word-up', {
           return 'translate(' + xPos(d) + ', ' + -(tileSize) + ')';
         });
 
-
-        this.on('mousedown', startSelection)
-          .on('mousemove', updateSelection);
-
-        this.each(function(d, i) {
-          d3.select(this).node().addEventListener('touchstart', startSelectionMobile);
-          d3.select(this).node().addEventListener('touchmove', updateSelectionMobile);
-        });
-
         this.append('rect')
           .attr({
             'class': 'tiles',
@@ -83,6 +74,24 @@ d3.chart('word-up', {
             'font-size': fontSize,
             'text-anchor': 'middle'
           });
+
+        var circle = this.append('circle')
+          .classed('hover', true)
+          .attr({
+            'cx': tileSize / 2,
+            'cy': tileSize / 2,
+            'r': tileSize * 0.3
+          })
+          .style({
+            'opacity': 0
+          });
+        circle.on('mousedown', startSelection)
+          .on('mousemove', updateSelection);
+        circle.each(function(d, i) {
+          d3.select(this).node().addEventListener('touchstart', startSelectionMobile);
+          d3.select(this).node().addEventListener('touchmove', updateSelectionMobile);
+        });
+
 
         return this;
       })
@@ -150,7 +159,7 @@ d3.chart('word-up', {
     }
 
     function updateSelectionMobile(e) {
-      var currentElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY).parentElement;
+      var currentElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
       var data = d3.select(currentElement).data()[0];
       updateSelection.call(currentElement, data);
     }
@@ -161,7 +170,7 @@ d3.chart('word-up', {
       }
       selectedLetters = [d];
       selectedLettersIds = [d.id];
-      d3.select(this).select('rect').classed('selected', true);
+      d3.select(this.parentElement).select('rect').classed('selected', true);
       isDragging = true;
     }
 
@@ -186,7 +195,7 @@ d3.chart('word-up', {
           if(secondLastLetter && secondLastLetter.id === d.id) {
             selectedLetters.pop();
             selectedLettersIds.pop();
-            d3.select(this.parentElement).selectAll('rect')
+            d3.select(this.parentElement.parentElement).selectAll('rect')
               .filter(function(datum) {
                 return lastLetter.id === datum.id;
               })
@@ -194,7 +203,7 @@ d3.chart('word-up', {
           } else{
             selectedLetters.push(d);
             selectedLettersIds.push(d.id);
-            d3.select(this).select('rect').classed('selected', true);
+            d3.select(this.parentElement).select('rect').classed('selected', true);
           }
         }
       }
