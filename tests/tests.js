@@ -15,6 +15,10 @@ describe("game", function() {
 		game.addToScore(1);
 		expect(game.getScore()).to.equal(1);
 	});
+	it("should change the high score", function() {
+		game.addToScore(100);
+		expect(game.getHighScore()).to.equal(100);
+	});
 	it("should be reset game", function() {
 		game.addToScore(1);
 		game.newGame();
@@ -116,5 +120,4 @@ describe("game", function() {
 		console.log(convertedData[0].id);
 		expect(convertedData).to.be.deep.equal(newData);
 	});
-	//test that the high score changes
 });
