@@ -43,9 +43,18 @@ var game = function() {
 
   var getRandomLetter = function() {
     var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Qu', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    var randomIndex = Math.floor(Math.random() * letters.length);
+    var weights = [817, 149, 278, 425, 1270, 223, 202, 609, 697, 15, 77, 402, 241, 675, 751, 193, 10, 599, 633, 906, 266, 98, 236, 15, 197, 7];
+    var weightedLetters = [];
+    var randomIndex;
 
-    return letters[randomIndex];
+    for(var i = 0; i < letters.length; i += 1) {
+      for(var j = 0; j < weights[i]; j += 1) {
+        weightedLetters.push(letters[i]);
+      }
+    }
+    randomIndex = Math.floor(Math.random() * weightedLetters.length);
+
+    return weightedLetters[randomIndex];
   };
 
   var addData = function() {
