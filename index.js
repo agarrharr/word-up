@@ -65,7 +65,7 @@ function isAWord(word, callback) {
 }
 
 function getPointsForWord(word) {
-  var lenth = word.length;
+  var length = word.length;
   var points;
 
   switch(length) {
