@@ -180,7 +180,7 @@ d3.chart('word-up', {
       var itsNotSelected;
       var itsThePreviousTile;
       var itsAdjacent;
-      if (d.row > 3) {
+      if (d === undefined || d.row > 3) {
         return;
       }
       if (isDragging) {
