@@ -29,14 +29,14 @@ setupScores();
 chart.on('wordCreated', function(d) {
   var word = '';
   if (d.length > 2) {
-    game.removeData(d);
-    game.addData();
     for(var i = 0; i < d.length; i += 1) {
       word += d[i].value.toLowerCase();
     }
     isAWord(word, function(success) {
       var currentScore;
       if (success) {
+        game.removeData(d);
+        game.addData();
         currentScore = getPointsForWord(word);
         game.addToScore(currentScore);
         game.addToMoves();
