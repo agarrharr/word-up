@@ -5,7 +5,6 @@ var width = 600;
 var tileSize = height / 6;
 var tileLargeSpace = tileSize * 0.8;
 
-
 preventScrollingOnPage();
 preventHighlightingLetters();
 
@@ -28,21 +27,45 @@ chart.draw(data);
 setupScores();
 
 chart.on('wordCreated', function(d) {
+  var word = '';
   if (d.length > 2) {
     game.removeData(d);
     game.addData();
-    var currentScore = getPointsForWord(d.length);
-    game.addToScore(currentScore);
-    game.addToMoves();
-    changeScoreOnPage();
-    changeHighScoreOnPage();
-    changeMovesOnPage();
-    chart.draw(game.convertData(game.getData()));
+    for(var i = 0; i < d.length; i += 1) {
+      word += d[i].value.toLowerCase();
+    }
+    isAWord(word, function(success) {
+      var currentScore;
+      if (success) {
+        currentScore = getPointsForWord(word);
+        game.addToScore(currentScore);
+        game.addToMoves();
+        changeScoreOnPage();
+        changeHighScoreOnPage();
+        changeMovesOnPage();
+        chart.draw(game.convertData(game.getData()));
+      }
+    });
   }
 });
 
+function isAWord(word, callback) {
+  var success = false;
+  var letter = word[0];
 
-function getPointsForWord(length) {
+  d3.csv('assets/eowl/' + letter + '.csv', function(d) {
+    for(var i = 0; i < d.length; i += 1) {
+      if (word === d[i][letter]) {
+        success = true;
+        break;
+      }
+    }
+    callback(success);
+  });
+}
+
+function getPointsForWord(word) {
+  var lenth = word.length;
   var points;
 
   switch(length) {
