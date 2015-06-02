@@ -19,6 +19,11 @@ Run this tests with:
 
 ### Planned
 
+* Move the letters down a tad
+* Style the stats
+* Add a new game button
+* Show the path of your word
+
 * Sync data to firebase for analytics
 * Make a mode that limits you to 5 moves and you just try to get the top score in 5 moves
 * Allow the user to put in their name when they beat the top score
@@ -30,23 +35,28 @@ Run this tests with:
 * Add Google Analytics
 * Add Google AdSense
 
-### Design
+* Let the user swap the top 2 rows
+* Add some tiles that have extra points
+* Count the number of letters instead of 1 point for 3 and 4 letter words (3 letters should be 3 points, and 4 should be 4, etc)
+* Add different points for different letters (Qu and Z should count for more)
+* Make it timed
+* Increment the number of moves counter even if they didn't choose a real word
+* Save incorrect words to firebase for analytics
+* Final score should be numberOfWords + letterScore - numberOfMoves
+* Add an animation at the end that counts up your final score
+* Add a pause button
+* When you pause it should cover up the board
+* Add a final animation
 
-* Move the letters down a tad
-* Style the stats
-* Add a new game button
-* Show the path of your word
+* Get it in Google Play
+* Integrate with Play Games
+* Add leaderboard
+* Add achievements
 
 ### Ideas
 
 * Wild card tiles
 * Scramble button to mix up the board
 * Multi-player
-* A mode that counts each letter a different amount (for example, more points for Qu)
-* Get it in Google Play
 * Get it in the App Store
-* Add achievements
-* Integrate with Play Games
 * Integrate with Game Center
-* Maybe let the use do something with the top 2 rows?
-* Maybe something wher there is a cascading effect
