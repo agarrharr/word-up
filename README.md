@@ -11,9 +11,13 @@ It's not quite working yet, but there is a demo to get an idea of how it would w
 
 ## Tests
 
+Install the karma cli with:
+
+    npm install -g karma-cli
+
 Run this tests with:
 
-    karma start karma.conf.js
+    karma start
 
 ## Todo
 
