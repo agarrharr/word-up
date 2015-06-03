@@ -32,7 +32,7 @@ chart.on('wordCreated', function(d) {
     for(var i = 0; i < d.length; i += 1) {
       word += d[i].value.toLowerCase();
     }
-    isAWord(word, function(success) {
+    game.isAWord(word, function(success) {
       var currentScore;
       if (success) {
         game.removeData(d);
@@ -48,21 +48,6 @@ chart.on('wordCreated', function(d) {
     });
   }
 });
-
-function isAWord(word, callback) {
-  var success = false;
-  var letter = word[0];
-
-  d3.csv('assets/eowl/' + letter + '.csv', function(d) {
-    for(var i = 0; i < d.length; i += 1) {
-      if (word === d[i][letter]) {
-        success = true;
-        break;
-      }
-    }
-    callback(success);
-  });
-}
 
 function getPointsForWord(word) {
   var length = word.length;

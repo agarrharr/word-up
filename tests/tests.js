@@ -117,7 +117,39 @@ describe("game", function() {
 			}
 		];
 		var convertedData = game.convertData(oldData);
-		console.log(convertedData[0].id);
 		expect(convertedData).to.be.deep.equal(newData);
+	});
+	it("should check if a word is left and there is no word", function() {
+		var data = [
+			[
+				{
+					id: 0,
+					value: 'A'
+				}, {
+					id: 1,
+					value: 'B'
+				}
+			], [
+				{
+					id: 2,
+					value: 'X'
+				}, {
+					id: 3,
+					value: 'Y'
+				}
+			]
+		];
+		game.setData(data);
+		expect(game.isAWordLeft()).to.be.false;
+	});
+	it("should check if string is a word", function() {
+		var trueCallback = function(success) {
+			expect(success).to.be.true;
+		};
+		var falseCallback = function(success) {
+			expect(success).to.be.false;
+		};
+		game.isAWord('hello', trueCallback);
+		game.isAWord('asdf', falseCallback);
 	});
 });
