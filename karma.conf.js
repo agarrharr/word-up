@@ -18,7 +18,8 @@ module.exports = function(config) {
       'tests/*.js',
       'bower_components/d3/d3.min.js',
       'bower_components/d3.chart/d3.chart.min.js',
-      'src/game.js'
+      'src/game.js',
+      {pattern: 'assets/eowl/*', watched: false, included: false, served: true}
     ],
 
 
@@ -58,7 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Safari'],
+    browsers: ['PhantomJS', 'Chrome', 'Firefox', /*'Safari'*/],
 
 
     // Continuous Integration mode
