@@ -1,3 +1,4 @@
+var baseurl = 'base';
 describe("game", function() {
 	beforeEach(function() {
 		game.newGame();

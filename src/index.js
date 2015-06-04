@@ -1,3 +1,4 @@
+var baseurl = '';
 var padding = 50;
 var strokeWidth = 5;
 var height = 800;
