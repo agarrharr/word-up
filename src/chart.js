@@ -130,7 +130,7 @@ d3.chart('word-up', {
             'fill': '#fff'
           })
           .attr({
-            'dy': tileSize * 0.65,
+            'dy': tileSize * 0.7,
             'dx': tileSize * 0.5
           })
           .text(function(d) {
