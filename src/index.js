@@ -29,25 +29,24 @@ setupScores();
 
 chart.on('wordCreated', function(d) {
   var word = '';
-  if (d.length > 2) {
-    for(var i = 0; i < d.length; i += 1) {
-      word += d[i].value.toLowerCase();
-    }
-    game.isAWord(word, function(success) {
-      var currentScore;
-      if (success) {
-        game.removeData(d);
-        game.addData();
-        currentScore = game.getPointsForWord(word);
-        game.addToScore(currentScore);
-        game.addToMoves();
-        changeScoreOnPage();
-        changeHighScoreOnPage();
-        changeMovesOnPage();
-        chart.draw(game.convertData(game.getData()));
-      }
-    });
+
+  for(var i = 0; i < d.length; i += 1) {
+    word += d[i].value.toLowerCase();
   }
+  game.isAWord(word, function(success) {
+    var currentScore;
+    if (success) {
+      game.removeData(d);
+      game.addData();
+      currentScore = game.getPointsForWord(word);
+      game.addToScore(currentScore);
+      game.addToMoves();
+      changeScoreOnPage();
+      changeHighScoreOnPage();
+      changeMovesOnPage();
+      chart.draw(game.convertData(game.getData()));
+    }
+  });
 });
 
 function changeMovesOnPage() {
