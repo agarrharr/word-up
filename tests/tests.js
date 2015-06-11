@@ -148,7 +148,7 @@ describe("game", function() {
 	});
 	it("should check if string is a word", function(done) {
 		var i = 0;
-		var numberOfTests = 3;
+		var numberOfTests = 4;
 		var trueCallback = function(success) {
 			expect(success).to.be.true;
 			i += 1;
@@ -166,5 +166,6 @@ describe("game", function() {
 		game.isAWord('hello', trueCallback);
 		game.isAWord('elephant', trueCallback);
 		game.isAWord('asdf', falseCallback);
+		game.isAWord('aa', falseCallback);
 	});
 });

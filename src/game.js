@@ -165,6 +165,10 @@ var game = function() {
     var success = false;
     var letter = word[0];
 
+    if (word.length < 3) {
+      callback(success);
+    }
+
     d3.csv(baseurl + '/assets/eowl/' + letter + '.csv', function(d) {
       for(var i = 0; i < d.length; i += 1) {
         if (word === d[i][letter]) {
