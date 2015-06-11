@@ -28,6 +28,9 @@ describe("game", function() {
 	it("should be able to get high score", function() {
 		expect(game.getHighScore()).to.be.a("number");
 	});
+	it("should be able to get points for a word", function() {
+		expect(game.getPointsForWord('hello')).to.equal(2);
+	});
 	it("should be able to get a random letter", function() {
 		expect(game.getRandomLetter()).to.be.a("string");
 		expect(game.getRandomLetter().length).to.be.below(3);

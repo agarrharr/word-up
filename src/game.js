@@ -57,6 +57,37 @@ var game = function() {
     return weightedLetters[randomIndex];
   };
 
+  var getPointsForWord = function(word) {
+    var length = word.length;
+    var points;
+
+    switch(length) {
+      case 3:
+        points = 1;
+        break;
+      case 4:
+        points = 1;
+        break;
+      case 5:
+        points = 2;
+        break;
+      case 6:
+        points = 3;
+        break;
+      case 7:
+        points = 5;
+        break;
+    }
+
+    if (length < 3) {
+      points = 0;
+    } else if (length > 7) {
+      points = 11;
+    }
+
+    return points;
+  }
+
   var addData = function() {
     var numberOfTiles = columns * (totalRows);
     if (data.length !== numberOfTiles) {
@@ -127,7 +158,7 @@ var game = function() {
   };
 
   var isAWordLeft = function() {
-	  return false;
+    return false;
   };
 
   var isAWord = function(word, callback) {
@@ -155,6 +186,7 @@ var game = function() {
     addToMoves: addToMoves,
     newGame: newGame,
     getRandomLetter: getRandomLetter,
+    getPointsForWord: getPointsForWord,
     addData: addData,
     removeData: removeData,
     convertData: convertData,
