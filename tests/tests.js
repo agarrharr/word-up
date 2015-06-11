@@ -144,15 +144,24 @@ describe("game", function() {
 		expect(game.isAWordLeft()).to.be.false;
 	});
 	it("should check if string is a word", function(done) {
+		var i = 0;
+		var numberOfTests = 3;
 		var trueCallback = function(success) {
 			expect(success).to.be.true;
-			done();
+			i += 1;
+			if (i === numberOfTests) {
+				done();
+			}
 		};
 		var falseCallback = function(success) {
 			expect(success).to.be.false;
-			done();
+			i += 1;
+			if (i === numberOfTests) {
+				done();
+			}
 		};
 		game.isAWord('hello', trueCallback);
+		game.isAWord('elephant', trueCallback);
 		game.isAWord('asdf', falseCallback);
 	});
 });
