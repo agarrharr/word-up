@@ -176,6 +176,7 @@ define('game',
 
       if (word.length < 3) {
         callback(success);
+        return;
       }
 
       d3.csv(baseUrl + 'assets/eowl/' + letter + '.csv', function(d) {
