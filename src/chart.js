@@ -1,7 +1,7 @@
-define('WordUp',
+define('Chart',
   ['d3', 'koto'],
   function(d3, Koto) {
-    var WordUp = Koto.extend({
+    var Chart = Koto.extend({
       initialize: function() {
         'use strict';
 
@@ -227,5 +227,5 @@ define('WordUp',
       }
     });
 
-  return WordUp;
+  return Chart;
 });

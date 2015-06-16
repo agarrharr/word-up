@@ -7,7 +7,7 @@ requirejs.config({
         koto: '../node_modules/koto/dist/koto.min'
     }
 });
-requirejs(['d3', 'game', 'WordUp'], function(d3, game, WordUp) {
+requirejs(['d3', 'game', 'Chart'], function(d3, game, Chart) {
   var padding = 50;
   var strokeWidth = 5;
   var height = 800;
@@ -28,7 +28,7 @@ requirejs(['d3', 'game', 'WordUp'], function(d3, game, WordUp) {
   var group = svg.append('g')
     .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
 
-  var chart = new WordUp(group);
+  var chart = new Chart(group);
 
   game.newGame();
   var data = game.convertData(game.getData());
