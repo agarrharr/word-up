@@ -1,80 +1,89 @@
-var baseurl = '';
-var padding = 50;
-var strokeWidth = 5;
-var height = 800;
-var width = 600;
-var tileSize = height / 6;
-var tileLargeSpace = tileSize * 0.8;
-
-preventScrollingOnPage();
-preventHighlightingLetters();
-
-var svg = d3.select('#game')
-  .append('svg')
-  .attr({
-    'height': height + padding * 2,
-    'width': width + padding * 2
-  });
-
-var group = svg.append('g')
-  .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
-
-var chart = group.chart('word-up');
-
-game.newGame();
-var data = game.convertData(game.getData());
-chart.draw(data);
-
-setupScores();
-
-chart.on('wordCreated', function(d) {
-  var word = '';
-
-  for(var i = 0; i < d.length; i += 1) {
-    word += d[i].value.toLowerCase();
-  }
-  game.isAWord(word, function(success) {
-    var currentScore;
-    if (success) {
-      game.removeData(d);
-      game.addData();
-      currentScore = game.getPointsForWord(word);
-      game.addToScore(currentScore);
-      game.addToMoves();
-      changeScoreOnPage();
-      changeHighScoreOnPage();
-      changeMovesOnPage();
-      chart.draw(game.convertData(game.getData()));
+requirejs.config({
+    baseUrl: '/src/',
+    paths: {
+        d3: '/bower_components/d3/d3.min',
+        koto: '/node_modules/koto/dist/koto.min'
     }
-  });
 });
+requirejs(['./game', './chart', 'd3'], function(game, chart, d3) {
+  var baseurl = '';
+  var padding = 50;
+  var strokeWidth = 5;
+  var height = 800;
+  var width = 600;
+  var tileSize = height / 6;
+  var tileLargeSpace = tileSize * 0.8;
 
-function changeMovesOnPage() {
-  d3.select('#moves').html(game.getMoves());
-}
+  preventScrollingOnPage();
+  preventHighlightingLetters();
 
-function changeScoreOnPage() {
-  d3.select('#score').html(game.getScore());
-}
+  var svg = d3.select('#game')
+    .append('svg')
+    .attr({
+      'height': height + padding * 2,
+      'width': width + padding * 2
+    });
 
-function changeHighScoreOnPage() {
-  d3.select('#highScore').html(game.getHighScore());
-}
+  var group = svg.append('g')
+    .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
 
-function setupScores() {
-  changeScoreOnPage();
-  changeHighScoreOnPage();
-}
+  var chart = group.chart('word-up');
 
-function preventScrollingOnPage() {
-  d3.select(document).node().addEventListener('touchstart', function(e) {
-    e.preventDefault();
+  game.newGame();
+  var data = game.convertData(game.getData());
+  chart.draw(data);
+
+  setupScores();
+
+  chart.on('wordCreated', function(d) {
+    var word = '';
+
+    for(var i = 0; i < d.length; i += 1) {
+      word += d[i].value.toLowerCase();
+    }
+    game.isAWord(word, function(success) {
+      var currentScore;
+      if (success) {
+        game.removeData(d);
+        game.addData();
+        currentScore = game.getPointsForWord(word);
+        game.addToScore(currentScore);
+        game.addToMoves();
+        changeScoreOnPage();
+        changeHighScoreOnPage();
+        changeMovesOnPage();
+        chart.draw(game.convertData(game.getData()));
+      }
+    });
   });
-}
 
-function preventHighlightingLetters() {
-  var element = d3.select('#game').node();
+  function changeMovesOnPage() {
+    d3.select('#moves').html(game.getMoves());
+  }
 
-  element.onselectstart = function(){ return false; };
-  element.onmousedown = function(){ return false; };
-}
+  function changeScoreOnPage() {
+    d3.select('#score').html(game.getScore());
+  }
+
+  function changeHighScoreOnPage() {
+    d3.select('#highScore').html(game.getHighScore());
+  }
+
+  function setupScores() {
+    changeScoreOnPage();
+    changeHighScoreOnPage();
+  }
+
+  function preventScrollingOnPage() {
+    d3.select(document).node().addEventListener('touchstart', function(e) {
+      e.preventDefault();
+    });
+  }
+
+  function preventHighlightingLetters() {
+    var element = d3.select('#game').node();
+
+    element.onselectstart = function(){ return false; };
+    element.onmousedown = function(){ return false; };
+  }
+});
