@@ -158,6 +158,27 @@ var game = function() {
   };
 
   var isAWordLeft = function() {
+    console.log(data);
+    var usedLetters = [];
+    for(var i = 0; i < rows; i += 1) {
+      for(var j = 0; j < columns; j += 1) {
+        if (usedLetters[i] === undefined) {
+          usedLetters[i] = [];
+        }
+        usedLetters[i][j] = false;
+      }
+    }
+
+    for(var i = 0; i < data.length; i += 1) {
+      for(var j = 0; j < data[i].length; j += 1) {
+        // get all possible paths starting at i, j
+        // loop through all paths
+        // check if it's a word
+        console.log(data[i][j].value);
+        if (usedLetters[i][j]) {
+        }
+      }
+    }
     return false;
   };
 
