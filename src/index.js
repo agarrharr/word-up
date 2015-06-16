@@ -1,11 +1,11 @@
 requirejs.config({
-    baseUrl: '/src/',
+    baseUrl: 'src/',
     paths: {
         d3: '/bower_components/d3/d3.min',
         koto: '/node_modules/koto/dist/koto.min'
     }
 });
-requirejs(['./game', './chart', 'd3'], function(game, chart, d3) {
+requirejs(['d3', 'game', 'WordUp'], function(d3, game, WordUp) {
   var baseurl = '';
   var padding = 50;
   var strokeWidth = 5;
@@ -27,7 +27,7 @@ requirejs(['./game', './chart', 'd3'], function(game, chart, d3) {
   var group = svg.append('g')
     .attr('transform', 'translate(' + strokeWidth + ', ' + -strokeWidth + ')');
 
-  var chart = group.chart('word-up');
+  var chart = new WordUp(group);
 
   game.newGame();
   var data = game.convertData(game.getData());
