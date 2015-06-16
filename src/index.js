@@ -1,10 +1,10 @@
-baseUrl = '';
+baseUrl = '../';
 
 requirejs.config({
     baseUrl: 'src/',
     paths: {
-        d3: '/bower_components/d3/d3.min',
-        koto: '/node_modules/koto/dist/koto.min'
+        d3: '../bower_components/d3/d3.min',
+        koto: '../node_modules/koto/dist/koto.min'
     }
 });
 requirejs(['d3', 'game', 'WordUp'], function(d3, game, WordUp) {
