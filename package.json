@@ -17,14 +17,14 @@
   },
   "homepage": "https://github.com/aharris88/toggle",
   "dependencies": {
-    "karma": "~0.12.34",
-    "karma-requirejs": "^0.2.2",
     "koto": "0.0.47",
     "matrix-paths": "0.0.3",
-    "mocha": "~2.2.5",
-    "requirejs": "^2.1.18"
+    "requirejs": "~2.1.18"
   },
   "devDependencies": {
+    "karma": "~0.12.34",
+    "mocha": "~2.2.5",
+    "karma-requirejs": "~0.2.2",
     "karma-chai": "~0.1.0",
     "karma-chrome-launcher": "~0.1.12",
     "karma-firefox-launcher": "~0.1.6",
