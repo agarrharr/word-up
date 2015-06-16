@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aharris88/toggle",
   "dependencies": {
     "karma": "~0.12.34",
+    "karma-requirejs": "^0.2.2",
     "koto": "0.0.47",
     "matrix-paths": "0.0.3",
     "mocha": "~2.2.5",
