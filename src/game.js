@@ -190,6 +190,20 @@ define('game',
       });
     };
 
+    var isAPrefix = function(word, callback) {
+      var success = false;
+      var letter = word[0];
+
+      d3.csv(baseUrl + 'assets/eowl/' + letter + '.csv', function(d) {
+        for(var i = 0; i < d.length; i += 1) {
+          if (word === d[i][letter].substr(0, word.length)) {
+            success = true;
+            break;
+          }
+        }
+        callback(success);
+      });
+    };
 
     return {
       getScore: getScore,
@@ -208,7 +222,8 @@ define('game',
       setData: setData,
       getRandomColor: getRandomColor,
       isAWordLeft: isAWordLeft,
-      isAWord: isAWord
+      isAWord: isAWord,
+      isAPrefix: isAPrefix
     };
   }
 );

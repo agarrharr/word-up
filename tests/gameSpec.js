@@ -191,5 +191,26 @@ define(['game'], function(game) {
 			game.isAWord('asdf', falseCallback);
 			game.isAWord('aa', falseCallback);
 		});
+		it("should check if string is a prefix", function(done) {
+			var i = 0;
+			var numberOfTests = 3;
+			var trueCallback = function(success) {
+				expect(success).to.be.true;
+				i += 1;
+				if (i === numberOfTests) {
+					done();
+				}
+			};
+			var falseCallback = function(success) {
+				expect(success).to.be.false;
+				i += 1;
+				if (i === numberOfTests) {
+					done();
+				}
+			};
+			game.isAPrefix('hel', trueCallback);
+			game.isAPrefix('elep', trueCallback);
+			game.isAPrefix('asd', falseCallback);
+		});
 	});
 });
