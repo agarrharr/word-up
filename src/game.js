@@ -227,6 +227,7 @@ define('game',
       setData: setData,
       getRandomColor: getRandomColor,
       isAWordLeft: isAWordLeft,
+      getPaths: getPaths,
       isAWord: isAWord,
       isAPrefix: isAPrefix
     };
