@@ -169,6 +169,89 @@ define(['game'], function(game) {
 		// 	game.setData(data);
 		// 	expect(game.isAWordLeft()).to.be.true;
 		// });
+		it("should calculate all available paths", function(done) {
+		 	var data = [
+		 		[
+		 			{
+		 				id: 0,
+		 				value: 'P'
+		 			}, {
+		 				id: 1,
+		 				value: 'I'
+		 			}
+		 		], [
+		 			{
+		 				id: 2,
+		 				value: 'P'
+		 			}, {
+		 				id: 3,
+		 				value: 'E'
+		 			}
+		 		]
+		 	];
+			var expPaths = [
+				[
+					[
+						{x: 0, y:0},
+						{x: 1, y:0}
+					],
+					[
+						{x: 0, y:0},
+						{x: 1, y:1}
+					],
+					[
+						{x: 0, y:0},
+						{x: 0, y:1}
+					]
+				],
+				[
+					[
+						{x: 1, y:0},
+						{x: 1, y:1}
+					],
+					[
+						{x: 1, y:0},
+						{x: 0, y:1}
+					],
+					[
+						{x: 1, y:0},
+						{x: 0, y:0}
+					]
+				],
+				[
+					[
+						{x: 0, y:1},
+						{x: 1, y:1}
+					],
+					[
+						{x: 0, y:1},
+						{x: 0, y:0}
+					],
+					[
+						{x: 0, y:1},
+						{x: 1, y:0}
+					]
+				],
+				[
+					[
+						{x: 1, y:1},
+						{x: 0, y:1}
+					],
+					[
+						{x: 1, y:1},
+						{x: 0, y:0}
+					],
+					[
+						{x: 1, y:1},
+						{x: 1, y:0}
+					]
+				]
+			];
+
+		 	game.setData(data);
+			var paths = game.getPaths();
+			expect(paths).to.be.deep.equal(expPaths);
+		});
 		it("should check if string is a word", function(done) {
 			var i = 0;
 			var numberOfTests = 4;
