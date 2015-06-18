@@ -159,15 +159,20 @@ define('game',
       return colors[randomIndex];
     };
 
-    var isAWordLeft = function() {
-      for(var i = 0; i < data.length; i += 1) {
-        for(var j = 0; j < data[i].length; j += 1) {
-          // get all possible paths starting at i, j
-          // loop through all paths
-          // check if it's a word
-        }
-      }
+    var isAWordLeft = function(depth, startingPositions) {
+      // if depth > 10 return false
+      // get all possible paths of depth 3
+      // loop through all startingPositions
+      // loop through all paths
+      // check if it's a prefix
+      // if it's a word return true
+      // if it's just a prefex mark it as a possible startingPosition
+      // call isAWordLeft(depth+1, startingPositions);
       return false;
+    };
+
+    var getPaths = function(depth, startingPositions) {
+      // return all paths grouped by startingPosition
     };
 
     var isAWord = function(word, callback) {
