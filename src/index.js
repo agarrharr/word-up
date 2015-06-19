@@ -1,4 +1,4 @@
-baseUrl = '../';
+baseUrl = '';
 
 requirejs.config({
     baseUrl: 'src/',
