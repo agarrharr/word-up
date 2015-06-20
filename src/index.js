@@ -7,7 +7,8 @@ requirejs.config({
         koto: '../node_modules/koto/dist/koto.min'
     }
 });
-requirejs(['d3', 'game', 'Chart'], function(d3, game, Chart) {
+requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
+console.log(path);
   var padding = 50;
   var strokeWidth = 5;
   var height = 800;

@@ -171,10 +171,6 @@ define('game',
       return false;
     };
 
-    var getPaths = function(depth, startingPositions) {
-      // return all paths grouped by startingPosition
-    };
-
     var isAWord = function(word, callback) {
       var success = false;
       var letter = word[0];
@@ -227,7 +223,6 @@ define('game',
       setData: setData,
       getRandomColor: getRandomColor,
       isAWordLeft: isAWordLeft,
-      getPaths: getPaths,
       isAWord: isAWord,
       isAPrefix: isAPrefix
     };
