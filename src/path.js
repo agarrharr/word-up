@@ -1,7 +1,7 @@
 define('path',
   [],
   function() {
-    var getPaths = function(depth, startingPositions) {
+    var getPaths = function(depth) {
       return [
           [
               [

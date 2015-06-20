@@ -9,7 +9,7 @@ define(['path'], function(path) {
 		it("should have a getPaths method", function() {
 			expect(path.getPaths).to.be.a('function');
 		});
-		it("should calculate all available paths", function(done) {
+		it("should calculate all available paths", function() {
 			var expPaths = [
 				[
 					[
