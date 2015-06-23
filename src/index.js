@@ -8,7 +8,6 @@ requirejs.config({
     }
 });
 requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
-console.log(path);
   var padding = 50;
   var strokeWidth = 5;
   var height = 800;
@@ -88,4 +87,5 @@ console.log(path);
     element.onselectstart = function(){ return false; };
     element.onmousedown = function(){ return false; };
   }
+  console.log(path.isAWordLeft([[0, 0]]));
 });

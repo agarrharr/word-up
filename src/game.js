@@ -206,6 +206,10 @@ define('game',
       });
     };
 
+    var getLetterAtLocation = function(location) {
+      return data[location.column][location.row].value;
+    };
+
     return {
       getScore: getScore,
       addToScore: addToScore,
@@ -224,7 +228,8 @@ define('game',
       getRandomColor: getRandomColor,
       isAWordLeft: isAWordLeft,
       isAWord: isAWord,
-      isAPrefix: isAPrefix
+      isAPrefix: isAPrefix,
+      getLetterAtLocation: getLetterAtLocation
     };
   }
 );
