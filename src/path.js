@@ -32,12 +32,10 @@ define('path',
 
     var isPathAWord = function(trail, callback) {
       callbackCounter += 1;
-      console.log(callbackCounter);
       var word = '';
       for(var i = 0; i < trail.length; i += 1) {
         word += game.getLetterAtLocation({row: trail[i][0], column: trail[i][1]});
       }
-      console.log(word);
       return game.isAWord(word, function(success) { callback(success, word); });
     };
 
@@ -62,9 +60,9 @@ define('path',
 
     var decrement = function(success, word, callback) {
       callbackCounter -= 1;
-      console.log(callbackCounter);
-      if (callbackCounter === 0) {
+      if ((success && callbackCounter > 0) || callbackCounter === 0) {
         callback(success, word);
+        callbackCounter = -1;
       }
     };
 
