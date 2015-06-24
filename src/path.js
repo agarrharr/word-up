@@ -3,12 +3,13 @@ define('path',
   function(game) {
     var numberOfRows = 4;
     var numberOfColumns = 4;
-    var callbackCounter = 0;
+    var callbackCounter;
     var startingPosition;
 
     var isAWordLeft = function(callback, path) {
       if (path === undefined) {
         path = [[0, 0]];
+        callbackCounter = 0;
       }
       startingPosition = path[0];
       if (path.length < 3) {
