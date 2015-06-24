@@ -123,52 +123,6 @@ define(['game'], function(game) {
 			var convertedData = game.convertData(oldData);
 			expect(convertedData).to.be.deep.equal(newData);
 		});
-		it("should check if a word is left and there is no word", function() {
-			var data = [
-				[
-					{
-						id: 0,
-						value: 'A'
-					}, {
-						id: 1,
-						value: 'B'
-					}
-				], [
-					{
-						id: 2,
-						value: 'X'
-					}, {
-						id: 3,
-						value: 'Y'
-					}
-				]
-			];
-			game.setData(data);
-			expect(game.isAWordLeft()).to.be.false;
-		});
-		// it("should check if a word is left and there is a word", function() {
-		// 	var data = [
-		// 		[
-		// 			{
-		// 				id: 0,
-		// 				value: 'P'
-		// 			}, {
-		// 				id: 1,
-		// 				value: 'I'
-		// 			}
-		// 		], [
-		// 			{
-		// 				id: 2,
-		// 				value: 'P'
-		// 			}, {
-		// 				id: 3,
-		// 				value: 'E'
-		// 			}
-		// 		]
-		// 	];
-		// 	game.setData(data);
-		// 	expect(game.isAWordLeft()).to.be.true;
-		// });
 		it("should check if string is a word", function(done) {
 			var i = 0;
 			var numberOfTests = 4;
