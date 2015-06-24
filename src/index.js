@@ -36,6 +36,8 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
 
   setupScores();
 
+  path.isAWordLeft(function(success, word) { console.log(success, word); });
+
   chart.on('wordCreated', function(d) {
     var word = '';
 
@@ -54,6 +56,8 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
         changeHighScoreOnPage();
         changeMovesOnPage();
         chart.draw(game.convertData(game.getData()));
+
+        path.isAWordLeft(function(success, word) { console.log(success, word); });
       }
     });
   });
@@ -87,5 +91,4 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
     element.onselectstart = function(){ return false; };
     element.onmousedown = function(){ return false; };
   }
-  path.isAWordLeft(function(success, word) { console.log(success, word); });
 });
