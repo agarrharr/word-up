@@ -6,7 +6,7 @@ define('path',
     var callbackCounter = 0;
     var startingPosition;
 
-    var isAWordLeft = function(path, callback) {
+    var isAWordLeft = function(callback, path) {
       if (path === undefined) {
         path = [[0, 0]];
       }
@@ -25,7 +25,7 @@ define('path',
           newLocation = [currentLocation[0] + i, currentLocation[1] + j];
           if (isNotAlreadyInPath(path, newLocation) && isAValidLocation(newLocation)) {
             path.push(newLocation);
-            isAWordLeft(path, callback);
+            isAWordLeft(callback, path);
             path.pop();
           }
         }
@@ -74,13 +74,13 @@ define('path',
     var startFromNextStartingPosition = function(callback) {
       if (startingPosition[0] < numberOfRows - 1) {
         startingPosition[0] += 1;
-        isAWordLeft([startingPosition], callback);
+        isAWordLeft(callback, [startingPosition]);
         return;
       }
       if (startingPosition[1] < numberOfColumns - 1) {
         startingPosition[0] = 0;
         startingPosition[1] += 1;
-        isAWordLeft([startingPosition], callback);
+        isAWordLeft(callback, [startingPosition]);
         return;
       }
       callback(false);

@@ -87,5 +87,5 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
     element.onselectstart = function(){ return false; };
     element.onmousedown = function(){ return false; };
   }
-  path.isAWordLeft([[0, 0]], function(success, word) { console.log(success, word); });
+  path.isAWordLeft(function(success, word) { console.log(success, word); });
 });
