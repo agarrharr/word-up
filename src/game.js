@@ -159,21 +159,9 @@ define('game',
       return colors[randomIndex];
     };
 
-    var isAWordLeft = function(depth, startingPositions) {
-      // if depth > 10 return false
-      // get all possible paths of depth 3
-      // loop through all startingPositions
-      // loop through all paths
-      // check if it's a prefix
-      // if it's a word return true
-      // if it's just a prefex mark it as a possible startingPosition
-      // call isAWordLeft(depth+1, startingPositions);
-      return false;
-    };
-
     var isAWord = function(word, callback) {
       var success = false;
-      var letter = word[0];
+      var letter = word[0].toLowerCase();
 
       if (word.length < 3) {
         callback(success);
@@ -182,7 +170,7 @@ define('game',
 
       d3.csv(baseUrl + 'assets/eowl/' + letter + '.csv', function(d) {
         for(var i = 0; i < d.length; i += 1) {
-          if (word === d[i][letter]) {
+          if (word.toLowerCase() === d[i][letter]) {
             success = true;
             break;
           }
@@ -193,11 +181,11 @@ define('game',
 
     var isAPrefix = function(word, callback) {
       var success = false;
-      var letter = word[0];
+      var letter = word[0].toLowerCase();
 
       d3.csv(baseUrl + 'assets/eowl/' + letter + '.csv', function(d) {
         for(var i = 0; i < d.length; i += 1) {
-          if (word === d[i][letter].substr(0, word.length)) {
+          if (word.toLowerCase() === d[i][letter].substr(0, word.length)) {
             success = true;
             break;
           }
@@ -226,7 +214,6 @@ define('game',
       getData: getData,
       setData: setData,
       getRandomColor: getRandomColor,
-      isAWordLeft: isAWordLeft,
       isAWord: isAWord,
       isAPrefix: isAPrefix,
       getLetterAtLocation: getLetterAtLocation
