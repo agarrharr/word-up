@@ -4,11 +4,13 @@ define('path',
     var numberOfRows = 4;
     var numberOfColumns = 4;
     var callbackCounter = 0;
+    var startingPosition;
 
     var isAWordLeft = function(path, callback) {
       if (path === undefined) {
         path = [[0, 0]];
       }
+      startingPosition = path[0];
       if (path.length < 3) {
         return callRecursiveFunctions(path, callback);
       }
@@ -60,10 +62,28 @@ define('path',
 
     var decrement = function(success, word, callback) {
       callbackCounter -= 1;
-      if ((success && callbackCounter > 0) || callbackCounter === 0) {
+      if (success && callbackCounter > 0) {
         callback(success, word);
         callbackCounter = -1;
       }
+      if (callbackCounter === 0) {
+        startFromNextStartingPosition(callback);
+      }
+    };
+
+    var startFromNextStartingPosition = function(callback) {
+      if (startingPosition[0] < numberOfRows - 1) {
+        startingPosition[0] += 1;
+        isAWordLeft([startingPosition], callback);
+        return;
+      }
+      if (startingPosition[1] < numberOfColumns - 1) {
+        startingPosition[0] = 0;
+        startingPosition[1] += 1;
+        isAWordLeft([startingPosition], callback);
+        return;
+      }
+      callback(false);
     };
 
     return {
