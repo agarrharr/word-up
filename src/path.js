@@ -5,43 +5,43 @@ define('path',
     var numberOfColumns = 4;
     var callbackCounter = 0;
 
-    var isAWordLeft = function(trail, callback) {
-      if (trail === undefined) {
-        trail = [[0, 0]];
+    var isAWordLeft = function(path, callback) {
+      if (path === undefined) {
+        path = [[0, 0]];
       }
-      if (trail.length < 3) {
-        return callRecursiveFunctions(trail, callback);
+      if (path.length < 3) {
+        return callRecursiveFunctions(path, callback);
       }
-      isPathAWord(trail, function(success, word) { decrement(success, word, callback); });
+      isPathAWord(path, function(success, word) { decrement(success, word, callback); });
     };
 
-    var callRecursiveFunctions = function(trail, callback) {
-      var currentLocation = trail[trail.length - 1];
+    var callRecursiveFunctions = function(path, callback) {
+      var currentLocation = path[path.length - 1];
       var newLocation;
       for(var i = -1; i <= 1; i += 1) {
         for(var j = -1; j <= 1; j += 1) {
           newLocation = [currentLocation[0] + i, currentLocation[1] + j];
-          if (isNotAlreadyInPath(trail, newLocation) && isAValidLocation(newLocation)) {
-            trail.push(newLocation);
-            isAWordLeft(trail, callback);
-            trail.pop();
+          if (isNotAlreadyInPath(path, newLocation) && isAValidLocation(newLocation)) {
+            path.push(newLocation);
+            isAWordLeft(path, callback);
+            path.pop();
           }
         }
       }
     };
 
-    var isPathAWord = function(trail, callback) {
+    var isPathAWord = function(path, callback) {
       callbackCounter += 1;
       var word = '';
-      for(var i = 0; i < trail.length; i += 1) {
-        word += game.getLetterAtLocation({row: trail[i][0], column: trail[i][1]});
+      for(var i = 0; i < path.length; i += 1) {
+        word += game.getLetterAtLocation({row: path[i][0], column: path[i][1]});
       }
       return game.isAWord(word, function(success) { callback(success, word); });
     };
 
-    var isNotAlreadyInPath = function(trail, newLocation) {
-      for(var i = 0; i < trail.length; i += 1) {
-        if (trail[i][0] === newLocation[0] && trail[i][1] === newLocation[1]) {
+    var isNotAlreadyInPath = function(path, newLocation) {
+      for(var i = 0; i < path.length; i += 1) {
+        if (path[i][0] === newLocation[0] && path[i][1] === newLocation[1]) {
           return false;
         }
       }
