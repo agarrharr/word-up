@@ -33,6 +33,7 @@ define('Chart',
         this._layer = this.base.append('g');
 
         _Chart.transform = function(data) {
+
           d3.select('body')
             .on('touchend', function() {
               endSelection();
@@ -66,7 +67,8 @@ define('Chart',
                 'height': tileSize,
                 'width': tileSize,
                 'rx': 15,
-                'ry': 15
+                'ry': 15,
+                'y':0
               });
 
             this.append('text')
@@ -143,14 +145,18 @@ define('Chart',
           })
           .on('exit', function() {
 
-            this.transition()
-              .duration(750)
-              .attr({
-                'transform': function(d) {
-                  return 'translate(' + (xPos(d) - tileSize * 0.5) + ',' + (yPos(d) + (tileSize * 1.5)) + '), rotate( 20 )';
-                }
-              })
-              .style('opacity', 0)
+            this.select('rect.tiles')
+            .transition()
+            .duration(750)
+            .ease('bounce')
+            .attr({
+              'height': 0,
+              'y': tileSize
+             });
+
+            this
+            .transition()
+              .delay(750)
               .remove();
 
             return this;
