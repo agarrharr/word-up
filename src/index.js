@@ -8,7 +8,6 @@ requirejs.config({
     }
 });
 requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
-
   var padding = 50;
   var strokeWidth = 5;
   var height = 800;

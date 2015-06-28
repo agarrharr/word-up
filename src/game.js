@@ -88,7 +88,7 @@ define('game',
       }
 
       return points;
-    }
+    };
 
     var addData = function() {
       var numberOfTiles = columns * (totalRows);
@@ -112,11 +112,20 @@ define('game',
     var removeData = function(d) {
       var row;
       var column;
-      for(var i = 0; i < d.length; i += 1) {
+      var i;
+      var j;
+      for(i = 0; i < d.length; i += 1) {
         row = d[i].row;
         column = d[i].column;
         if (data && data[d[i].column] && data[d[i].column][d[i].row]) {
-          data[d[i].column].splice(d[i].row, 1);
+          data[d[i].column][d[i].row].removed = true;
+        }
+      }
+      for(i = data.length - 1; i >= 0; i -= 1) {
+        for(j = data[i].length - 1; j >= 0; j -= 1) {
+          if (data[i][j].removed) {
+            data[i].splice(j, 1);
+          }
         }
       }
     };
