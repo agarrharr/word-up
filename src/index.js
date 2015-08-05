@@ -14,6 +14,8 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
   var width = 600;
   var tileSize = height / 6;
   var tileLargeSpace = tileSize * 0.8;
+  var headerHeight = 290;
+  var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
   preventScrollingOnPage();
   preventHighlightingLetters();
@@ -32,6 +34,7 @@ requirejs(['d3', 'game', 'Chart', 'path'], function(d3, game, Chart, path) {
 
   game.newGame();
   var data = game.convertData(game.getData());
+  chart.height(viewportHeight - headerHeight);
   chart.draw(data);
 
   setupScores();

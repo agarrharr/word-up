@@ -7,20 +7,14 @@ define('Chart',
 
         var _Chart = this;
 
-        _Chart.height = 800;
+        _Chart._height = 800;
 
         var padding = 10;
         var rows = 4;
         var initialDelayTime = 100;
-        var tileSize = (_Chart.height / 6) - padding;
+        var tileSize;
         var fontSize = tileSize * 0.6;
-        var yPos = function(d) {
-          if (d.row > 3) {
-            return _Chart.height - tileSize - (d.row * (tileSize + padding));
-          } else {
-            return _Chart.height - tileSize + (tileSize * 0.75) - (d.row * (tileSize + padding));
-          }
-        };
+        var yPos;
         var xPos = function(d) {
           return d.column * (tileSize + padding);
         };
@@ -33,6 +27,15 @@ define('Chart',
         this._layer = this.base.append('g');
 
         _Chart.transform = function(data) {
+
+          tileSize = (_Chart._height / 6.75) - padding;
+          yPos = function(d) {
+            if (d.row > 3) {
+              return _Chart._height - tileSize - (d.row * (tileSize + padding));
+            } else {
+              return _Chart._height - tileSize + (tileSize * 0.75) - (d.row * (tileSize + padding));
+            }
+          };
 
           d3.select('body')
             .on('touchend', function() {
@@ -228,7 +231,7 @@ define('Chart',
       },
 
       height: function(value) {
-        this.height = value;
+        this._height = value;
         return this;
       }
     });
